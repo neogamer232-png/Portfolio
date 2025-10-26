@@ -1,99 +1,278 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Portfolio</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6; color: #333; background-color: #f5f5f5;
-        }
-        nav { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            padding: 1rem 0; position: fixed; width: 100%; top: 0; z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        nav ul { list-style: none; display: flex; justify-content: center; gap: 2rem; }
-        nav a { color: white; text-decoration: none; font-weight: 500; transition: all 0.3s ease;
-            padding: 0.5rem 1rem; border-radius: 5px; }
-        nav a:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); }
-        .hero { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white;
-            padding: 150px 20px 100px; text-align: center; margin-top: 60px; }
-        .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
-        .hero p { font-size: 1.3rem; opacity: 0.9; }
-        section { max-width: 1200px; margin: 0 auto; padding: 80px 20px; }
-        section h2 { font-size: 2.5rem; margin-bottom: 2rem; text-align: center; color: #1e3c72; }
-        .about-content { display: grid; grid-template-columns: 1fr 2fr; gap: 3rem; align-items: center;
-            background: white; padding: 3rem; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
-        .profile-img { width: 100%; max-width: 300px; height: 300px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 10px; display: flex; align-items: center; justify-content: center;
-            color: white; font-size: 4rem; }
-        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
-        .skill-card, .project-card { background: white; padding: 2rem; border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1); transition: all 0.3s ease; }
-        .skill-card:hover, .project-card:hover { transform: translateY(-10px); }
-        .project-img { height: 200px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem; }
-        .contact-form { max-width: 600px; margin: 0 auto; background: white; padding: 3rem;
-            border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
-        footer { background: #1e3c72; color: white; text-align: center; padding: 2rem; }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nitin Kumar — Creative Professional, Designer & Developer</title>
+  <meta name="description" content="Portfolio of Nitin Kumar — creative professional blending design and development to craft human-centered experiences." />
+  <meta name="theme-color" content="#667eea" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Nitin Kumar — Creative Professional" />
+  <meta property="og:description" content="Design, storytelling, and innovative experiences — portfolio of Nitin Kumar." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- JSON-LD (basic) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Nitin Kumar",
+    "jobTitle": "Creative Professional, Designer, Developer",
+    "url": ".",
+    "sameAs": []
+  }
+  </script>
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --text:#111827;
+      --muted:#4b5563;
+      --accent-1:#667eea;
+      --accent-2:#764ba2;
+      --nav-height:72px;
+      --max-width:1400px;
+    }
+
+    /* Reset + base */
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      line-height:1.6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+    }
+
+    /* Skip link for keyboard users */
+    .skip-link{
+      position:absolute;
+      left:0;
+      top:0;
+      transform:translateY(-120%);
+      background:#111827;
+      color:#fff;
+      padding:0.5rem 1rem;
+      border-radius:0 0.25rem 0.25rem 0;
+      z-index:2000;
+      transition:transform .18s ease;
+    }
+    .skip-link:focus{transform:translateY(0%)}
+
+    /* Nav */
+    nav{
+      position:fixed;
+      inset:0 auto auto 0;
+      width:100%;
+      top:0;
+      z-index:1000;
+      padding:1.2rem 2rem;
+      display:flex;
+      justify-content:center;
+      backdrop-filter:blur(10px);
+      background:rgba(255,255,255,0.96);
+      border-bottom:1px solid rgba(0,0,0,0.06);
+      transition:all .28s ease;
+      height:var(--nav-height);
+    }
+    nav.scrolled{ padding:.6rem 2rem; box-shadow:0 8px 30px rgba(15,23,42,0.06) }
+    nav ul{ list-style:none; display:flex; gap:2rem; margin:0; padding:0; align-items:center; height:100% }
+    nav a{ color:var(--text); text-decoration:none; font-weight:600; font-size:clamp(.9rem,1.4vw,.98rem); padding:.3rem .4rem; border-radius:6px; display:inline-flex; align-items:center; height:100% }
+    nav a:focus{ outline:3px solid rgba(102,126,234,0.18); outline-offset:3px }
+    nav a:hover{ color:var(--accent-1) }
+
+    /* Hero */
+    .hero{
+      min-height:calc(100vh - var(--nav-height));
+      padding:calc(var(--nav-height) + 2.5rem) 1.5rem 4rem;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      position:relative;
+      color:#fff;
+      background:linear-gradient(135deg,var(--accent-1) 0%,var(--accent-2) 100%);
+      overflow:hidden;
+    }
+
+    /* Decorative shapes (reduced motion support below) */
+    .floating-shape{ position:absolute; border-radius:50%; opacity:.08; transform-origin:center; mix-blend-mode:screen; }
+    .shape-1{ width:300px; height:300px; background:#fff; top:8%; left:6% }
+    .shape-2{ width:220px; height:220px; background:#fff; top:60%; right:12%; }
+    .shape-3{ width:150px; height:150px; background:#fff; bottom:12%; left:18% }
+
+    @keyframes float { 0%,100%{ transform:translateY(0) } 50%{ transform:translate(18px,-18px) } }
+    @media (prefers-reduced-motion: no-preference){
+      .shape-1,.shape-2,.shape-3{ animation:float 20s infinite ease-in-out }
+      .shape-2{ animation-delay:3s }
+      .shape-3{ animation-delay:6s }
+    }
+
+    .hero h1{ font-size:clamp(2.4rem,6.5vw,5rem); line-height:1; margin:.2rem 0 .6rem; font-weight:800 }
+    .hero p{ font-size:clamp(1rem,2.2vw,1.5rem); margin-bottom:1.6rem; color:rgba(255,255,255,0.95) }
+    .cta-button{
+      display:inline-block;
+      padding:.9rem 2.2rem;
+      background:#fff;
+      color:var(--accent-1);
+      border-radius:999px;
+      font-weight:700;
+      text-decoration:none;
+      box-shadow:0 6px 18px rgba(0,0,0,0.12);
+    }
+    .cta-button:focus{ outline:3px solid rgba(118,75,162,0.16); outline-offset:3px }
+    .cta-button:hover{ transform:translateY(-3px) }
+
+    main{ max-width:var(--max-width); margin:0 auto; width:100%; padding:3rem 1.25rem; }
+
+    section{ padding:4rem 0; }
+    section h2{ text-align:center; font-size:clamp(1.6rem,3.6vw,3rem); margin-bottom:2rem }
+
+    /* About */
+    .about-grid{ display:grid; grid-template-columns:1fr 1fr; gap:3.5rem; align-items:center }
+    .profile-img{
+      width:100%;
+      min-height:360px;
+      border-radius:20px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(135deg,var(--accent-1),var(--accent-2));
+      color:#fff;
+      font-size:6rem;
+    }
+    .about-text p{ color:var(--muted); font-size:clamp(.98rem,1.6vw,1.12rem); margin-bottom:1.15rem; line-height:1.7 }
+
+    /* Contact card */
+    #contact-section{ background:linear-gradient(135deg,var(--accent-1),var(--accent-2)); color:#fff; border-radius:18px; padding:3rem; box-shadow:0 12px 40px rgba(0,0,0,0.12) }
+    .contact-content{ display:grid; gap:1.5rem; justify-items:center }
+    iframe{ width:100%; max-width:100%; height:560px; border:0; border-radius:12px; background:#fff; box-shadow:0 8px 28px rgba(0,0,0,0.18) }
+
+    footer{ text-align:center; padding:2.25rem 1rem; color:#f8fafc; background:#0b1220; margin-top:2rem; border-radius:8px }
+
+    /* Accessibility and focus helpers */
+    a:not(.cta-button):focus, button:focus{ outline:3px solid rgba(102,126,234,0.14); outline-offset:2px; border-radius:6px }
+
+    /* Responsive */
+    @media (max-width:980px){
+      .about-grid{ grid-template-columns:1fr; }
+      .hero{ padding-top:calc(var(--nav-height) + 1.25rem); padding-bottom:3rem }
+      iframe{ height:420px }
+    }
+
+    @media (max-width:420px){
+      nav{ padding:1rem }
+      .hero h1{ font-size:2.6rem }
+      .profile-img{ min-height:260px; font-size:4rem }
+    }
+  </style>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
+  <a href="#main" class="skip-link">Skip to main content</a>
 
-    <div class="hero" id="home">
-        <h1>Your Name</h1>
-        <p>Web Developer | Designer | Creative Professional</p>
+  <nav aria-label="Main navigation">
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact-section">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero" role="banner" aria-labelledby="hero-heading">
+    <!-- Decorative shapes are aria-hidden -->
+    <div class="floating-shape shape-1" aria-hidden="true"></div>
+    <div class="floating-shape shape-2" aria-hidden="true"></div>
+    <div class="floating-shape shape-3" aria-hidden="true"></div>
+
+    <div>
+      <h1 id="hero-heading">Nitin Kumar</h1>
+      <p>Creative Professional — Designer & Developer</p>
+      <a class="cta-button" href="#contact-section">Get in Touch</a>
     </div>
+  </header>
 
-    <section id="about">
-        <h2>About Me</h2>
-        <div class="about-content">
-            <div class="profile-img">👤</div>
-            <div>
-                <p>Hello! I'm a passionate professional with expertise in web development and design.</p>
-                <p>I love creating beautiful, functional websites that solve real problems and provide great user experiences.</p>
-            </div>
+  <main id="main" role="main">
+    <section id="about" aria-labelledby="about-heading">
+      <h2 id="about-heading">About Me</h2>
+      <div class="about-grid">
+        <div class="profile-img" role="img" aria-label="Portrait illustration of Nitin Kumar">
+          <!-- Replace with an optimized image or SVG for production -->
+          👤
         </div>
-    </section>
 
-    <section id="skills">
-        <h2>My Skills</h2>
-        <div class="skills-grid">
-            <div class="skill-card"><h3>💻 Web Development</h3><p>HTML, CSS, JavaScript.</p></div>
-            <div class="skill-card"><h3>🎨 UI/UX Design</h3><p>Designing user-friendly interfaces.</p></div>
+        <div class="about-text">
+          <p>Hello! I'm <strong>Nitin Kumar</strong>, a creative professional passionate about design, storytelling, and building meaningful digital experiences. I blend visual thinking with code to craft human-centered interfaces that connect people and ideas.</p>
+          <p>My goal is to design solutions that feel intuitive and look beautiful across devices. I enjoy collaborating with product teams to deliver work that solves real problems.</p>
         </div>
+      </div>
     </section>
 
-    <section id="projects">
-        <h2>My Projects</h2>
-        <div class="projects-grid">
-            <div class="project-card"><div class="project-img">🚀</div><p>Project description here.</p></div>
-        </div>
-    </section>
+    <section aria-labelledby="contact-heading">
+      <h2 id="contact-heading">Let's Connect</h2>
+      <div id="contact-section" class="contact-content" role="region" aria-labelledby="contact-heading">
+        <!-- Replace YOUR_FORM_ID below with your Google Form ID or remove iframe and use a native form -->
+        <iframe
+          title="Contact form"
+          loading="lazy"
+          src="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform?embedded=true">
+          Loading…
+        </iframe>
 
-    <section id="contact">
-        <h2>Get In Touch</h2>
-        <form class="contact-form" id="contactForm">
-            <label>Name</label><input type="text" required>
-            <label>Email</label><input type="email" required>
-            <label>Message</label><textarea required></textarea>
-            <button type="submit">Send Message</button>
-        </form>
+        <p style="max-width:60ch; text-align:center; color:rgba(255,255,255,0.9);">
+          If the form doesn't load, <a href="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform" style="color:#fff; text-decoration:underline;" target="_blank" rel="noopener noreferrer">open the contact form in a new tab</a>.
+        </p>
+      </div>
     </section>
+  </main>
 
-    <footer>
-        <p>&copy; 2025 Your Name. All rights reserved.</p>
-    </footer>
+  <footer role="contentinfo">
+    <div>© 2025 Nitin Kumar — All rights reserved.</div>
+  </footer>
+
+  <script>
+    // Smooth-scrolling anchors and accessible focus behaviour
+    (function(){
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reduce) {
+        // Use CSS-native if supported; set as fallback for older browsers
+        document.documentElement.style.scrollBehavior = 'smooth';
+      }
+
+      // Toggle nav shrink on scroll (passive listener)
+      const nav = document.querySelector('nav');
+      window.addEventListener('scroll', function(){ nav.classList.toggle('scrolled', window.scrollY > 50) }, {passive:true});
+
+      // Improve fragment navigation: use scrollIntoView + focus when appropriate
+      document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', function(e){
+          const href = this.getAttribute('href');
+          // allow plain '#' or external anchors to behave normally
+          if (!href || href === '#') return;
+          const id = href.slice(1);
+          const target = document.getElementById(id);
+          if(target){
+            e.preventDefault();
+            const supportsScroll = 'scrollBehavior' in document.documentElement.style || !reduce;
+            if (supportsScroll && !reduce && typeof target.scrollIntoView === 'function') {
+              target.scrollIntoView({behavior: 'smooth', block: 'start'});
+            } else {
+              target.scrollIntoView();
+            }
+            // Ensure focusable for screen readers and keyboard users without leaving tabindex residue
+            const prevTabindex = target.getAttribute('tabindex');
+            const removeTabindex = prevTabindex === null;
+            if (removeTabindex) target.setAttribute('tabindex', '-1');
+            target.focus({preventScroll:true});
+            if (removeTabindex) target.removeAttribute('tabindex');
+          }
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
