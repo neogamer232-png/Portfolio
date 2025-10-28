@@ -290,6 +290,160 @@
     .project-info h3 { font-size: 1.05rem; margin-bottom: .5rem; font-weight: 400; letter-spacing: 1px; text-transform: uppercase; }
     .project-info p { color: #666; line-height: 1.6; font-weight: 300; }
 
+    /* PLACEHOLDER CARDS */
+    .placeholder-cards {
+      display: none; /* Hidden — used as data source */
+    }
+    .placeholder-card {
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform .3s ease, box-shadow .3s ease;
+      position: relative;
+    }
+    .placeholder-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    }
+    .placeholder-thumb {
+      height: 220px;
+      background: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      color: #ccc;
+      font-weight: 300;
+    }
+    .placeholder-info {
+      padding: 1.4rem;
+      text-align: center;
+    }
+    .placeholder-info h3 {
+      font-size: 1.15rem;
+      margin-bottom: .4rem;
+      font-weight: 500;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+    .placeholder-info p {
+      font-size: .88rem;
+      color: #777;
+      line-height: 1.6;
+    }
+
+    /* OVERLAY PANEL */
+    .overlay-panel {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+      box-shadow: 0 -8px 40px rgba(0,0,0,0.12);
+      z-index: 1300;
+      transform: translateY(100%);
+      transition: transform .45s cubic-bezier(0.25, 0.8, 0.25, 1);
+      max-height: 90vh;
+      overflow-y: auto;
+      padding-bottom: 2rem;
+    }
+    .overlay-panel.active {
+      transform: translateY(0);
+    }
+    .overlay-header {
+      position: sticky;
+      top: 0;
+      background: #fff;
+      padding: 1.2rem 1.6rem;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+    }
+    .overlay-header h3 {
+      font-size: 1.25rem;
+      font-weight: 500;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+    .overlay-close {
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #666;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: background .2s ease;
+    }
+    .overlay-close:hover {
+      background: #f0f0f0;
+    }
+    .overlay-content {
+      padding: 1.6rem;
+    }
+    .overlay-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.4rem;
+    }
+    .overlay-item {
+      border: 1px solid #eee;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform .25s ease;
+    }
+    .overlay-item:hover {
+      transform: translateY(-4px);
+    }
+    .overlay-item-img {
+      height: 180px;
+      background: #f5f5f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: #ccc;
+    }
+    .overlay-item-info {
+      padding: 1rem;
+      background: #fff;
+    }
+    .overlay-item-info h4 {
+      font-size: 1rem;
+      margin-bottom: .3rem;
+      font-weight: 500;
+    }
+    .overlay-item-info p {
+      font-size: .82rem;
+      color: #777;
+      line-height: 1.5;
+    }
+
+    /* Background dim */
+    .page-dimmer {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 1250;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .45s ease;
+    }
+    .page-dimmer.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
     /* MODALS */
     .modal {
       display: none; position: fixed; z-index: 12000;
@@ -368,6 +522,7 @@
       .project-img { height: 200px; }
       .bubble { filter: blur(6px); opacity: 0.85; }
       .bubble.b1, .bubble.b3, .bubble.b7 { width: 160px; height: 160px; }
+      .overlay-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -387,7 +542,7 @@
       </ul>
     </div>
     <div class="nav-actions">
-      <button id="menuToggle" class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <button id="menuToggle" class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">Menu</button>
       <button id="assetTrigger" class="asset-trigger" aria-haspopup="true" aria-expanded="false" aria-controls="assetDropdown" title="Resume & CV">
         <span class="asset-icon" aria-hidden="true"></span>
         <span>Docs</span>
@@ -488,6 +643,7 @@
   <section id="projects" aria-labelledby="projects-heading">
     <h2 id="projects-heading">Selected Work</h2>
     <div class="projects-grid">
+      <!-- Video Projects -->
       <div class="project-card" onclick="openVideoModal('video1')" role="button" tabindex="0">
         <div class="project-img" style="background-image:url('https://img.youtube.com/vi/yS_KAfkAy7E/maxresdefault.jpg');"></div>
         <div class="project-info"><h3>Video Editing - Project 1</h3><p>Professional editing and color grading showcase — click to watch.</p></div>
@@ -500,16 +656,95 @@
         <div class="project-img" style="background-image:url('https://img.youtube.com/vi/ZGYZ5iq2X9Q/maxresdefault.jpg');"></div>
         <div class="project-info"><h3>Video Editing - Project 3</h3><p>Dynamic edits with motion graphics and sound design.</p></div>
       </div>
-      <div class="project-card"><div class="project-img">UI/UX</div><div class="project-info"><h3>UI/UX Design</h3><p>Complete product flows and visual systems for apps & websites.</p></div></div>
-      <div class="project-card"><div class="project-img">Motion</div><div class="project-info"><h3>Motion Design</h3><p>Animated brand assets and explainer sequences.</p></div></div>
-      <div class="project-card"><div class="project-img">Graphics</div><div class="project-info"><h3>Graphic Design</h3><p>Brand identity, posters, thumbnails and visual systems.</p></div></div>
+
+      <!-- Placeholder Cards (Clickable) -->
+      <div class="placeholder-card" data-category="uiux" tabindex="0" role="button" aria-label="Open UI/UX Projects">
+        <div class="placeholder-thumb">UI/UX</div>
+        <div class="placeholder-info">
+          <h3>UI/UX Design</h3>
+          <p>Explore user flows, wireframes, and interactive prototypes.</p>
+        </div>
+      </div>
+      <div class="placeholder-card" data-category="motion" tabindex="0" role="button" aria-label="Open Motion Projects">
+        <div class="placeholder-thumb">Motion</div>
+        <div class="placeholder-info">
+          <h3>Motion Design</h3>
+          <p>See animated sequences, transitions, and explainer videos.</p>
+        </div>
+      </div>
+      <div class="placeholder-card" data-category="graphics" tabindex="0" role="button" aria-label="Open Graphics Projects">
+        <div class="placeholder-thumb">Graphics</div>
+        <div class="placeholder-info">
+          <h3>Graphic Design</h3>
+          <p>View branding, posters, thumbnails, and visual identities.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hidden Data Source for Overlay -->
+    <div class="placeholder-cards">
+      <!-- UI/UX -->
+      <div class="placeholder-card" data-category="uiux">
+        <div class="placeholder-thumb">App</div>
+        <div class="placeholder-info"><h3>Mobile Banking App</h3><p>Full redesign with accessibility focus.</p></div>
+      </div>
+      <div class="placeholder-card" data-category="uiux">
+        <div class="placeholder-thumb">Web</div>
+        <div class="placeholder-info"><h3>E-commerce Platform</h3><p>Checkout flow optimization.</p></div>
+      </div>
+      <div class="placeholder-card" data-category="uiux">
+        <div class="placeholder-thumb">Dash</div>
+        <div class="placeholder-info"><h3>Analytics Dashboard</h3><p>Data visualization & dark mode.</p></div>
+      </div>
+
+      <!-- Motion -->
+      <div class="placeholder-card" data-category="motion">
+        <div class="placeholder-thumb">Anim</div>
+        <div class="placeholder-info"><h3>Brand Intro</h3><p>30-second kinetic typography.</p></div>
+      </div>
+      <div class="placeholder-card" data-category="motion">
+        <div class="placeholder-thumb">Trans</div>
+        <div class="placeholder-info"><h3>Scene Transition</h3><p>Smooth morphing effects.</p></div>
+      </div>
+      <div class="placeholder-card" data-category="motion">
+        <div class="placeholder-thumb">Expl</div>
+        <div class="placeholder-info"><h3>Product Explainer</h3><p>2D motion graphics.</p></div>
+      </div>
+
+      <!-- Graphics -->
+      <div class="placeholder-card" data-category="graphics">
+        <div class="placeholder-thumb">Logo</div>
+        <div class="placeholder-info"><h3>Tech Startup Logo</h3><p>Minimal vector identity.</p></div>
+      </div>
+      <div class="placeholder-card" data-category="graphics">
+        <div class="placeholder-thumb">Poster</div>
+        <div class="placeholder-info"><h3>Event Poster</h3><p>Print-ready A2 design.</p></div>
+      </div>
+      <div class="placeholder-card" data-category="graphics">
+        <div class="placeholder-thumb">Thumb</div>
+        <div class="placeholder-info"><h3>YouTube Thumbnail</h3><p>High CTR template.</p></div>
+      </div>
     </div>
   </section>
+
+  <!-- Overlay Panel -->
+  <div class="page-dimmer" id="dimmer"></div>
+  <div class="overlay-panel" id="overlayPanel" role="dialog" aria-modal="true" aria-labelledby="overlayTitle">
+    <div class="overlay-header">
+      <h3 id="overlayTitle">Projects</h3>
+      <button class="overlay-close" id="overlayClose" aria-label="Close panel">×</button>
+    </div>
+    <div class="overlay-content">
+      <div class="overlay-grid" id="overlayGrid">
+        <!-- Filled by JS -->
+      </div>
+    </div>
+  </div>
 
   <!-- PDF Modal -->
   <div id="pdfModal" class="modal" role="dialog" aria-label="Document preview">
     <div class="modal-content" style="max-width:900px;">
-      <button id="pdfClose" class="close-modal" aria-label="Close">&times;</button>
+      <button id="pdfClose" class="close-modal" aria-label="Close">×</button>
       <div style="display:flex; gap:.6rem; align-items:center; justify-content:space-between; margin-bottom:.6rem; color:#fff;">
         <div id="pdfTitle" style="font-weight:600;"></div>
         <div>
@@ -526,7 +761,7 @@
   <!-- Video Modal -->
   <div id="videoModal" class="modal" onclick="closeVideoModal()">
     <div class="modal-content" onclick="event.stopPropagation()">
-      <button class="close-modal" onclick="closeVideoModal()" aria-label="Close">&times;</button>
+      <button class="close-modal" onclick="closeVideoModal()" aria-label="Close">×</button>
       <div class="video-container">
         <iframe id="videoFrame" src="" title="Project video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
@@ -653,13 +888,58 @@
 
     // Escape key
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') { closePdfPreview(); closeVideoModal(); }
+      if (e.key === 'Escape') { closePdfPreview(); closeVideoModal(); closeOverlay(); }
     });
 
     // Keyboard for project cards
-    document.querySelectorAll('.project-card[role="button"]').forEach(card => {
-      card.addEventListener('keydown', e => (e.key === 'Enter' || e.key === ' ') && card.click());
+    document.querySelectorAll('.project-card[role="button"], .placeholder-card[role="button"]').forEach(card => {
+      card.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          card.click();
+        }
+      });
     });
+
+    // === OVERLAY PANEL LOGIC ===
+    const overlayPanel = document.getElementById('overlayPanel');
+    const overlayGrid = document.getElementById('overlayGrid');
+    const overlayTitle = document.getElementById('overlayTitle');
+    const overlayClose = document.getElementById('overlayClose');
+    const dimmer = document.getElementById('dimmer');
+    const allExamples = document.querySelectorAll('.placeholder-cards .placeholder-card');
+
+    const titles = {
+      uiux: 'UI/UX Design',
+      motion: 'Motion Design',
+      graphics: 'Graphic Design'
+    };
+
+    function openOverlay(category) {
+      overlayTitle.textContent = titles[category] || 'Projects';
+      overlayGrid.innerHTML = '';
+      allExamples.forEach(card => {
+        if (card.dataset.category === category) {
+          overlayGrid.appendChild(card.cloneNode(true));
+        }
+      });
+      overlayPanel.classList.add('active');
+      dimmer.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeOverlay() {
+      overlayPanel.classList.remove('active');
+      dimmer.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    document.querySelectorAll('.projects-grid .placeholder-card').forEach(card => {
+      card.addEventListener('click', () => openOverlay(card.dataset.category));
+    });
+
+    overlayClose.addEventListener('click', closeOverlay);
+    dimmer.addEventListener('click', closeOverlay);
   </script>
 </body>
 </html>
