@@ -1,247 +1,414 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfolio of Nitin Kumar – Creative Professional, Designer, and Developer.">
-    <title>Nitin Kumar - Creative Professional</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Nitin Kumar — Creative Professional</title>
+  <meta name="description" content="Nitin Kumar — Creative Designer & Video Editor. UI/UX, Motion, Video Editing, Colour Grading." />
+  <meta name="theme-color" content="#000000" />
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <style>
+    /* Reset & base */
+    *{margin:0;padding:0;box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      font-family:"Helvetica Neue",Arial,sans-serif;
+      line-height:1.6;
+      color:#0b0b0b;
+      background:#fff;
+      overflow-x:hidden;
+      -webkit-font-smoothing:antialiased;
+    }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: #1a1a1a;
-            background-color: #fff;
-            overflow-x: hidden;
-        }
+    /* NAV */
+    nav{
+      background:#fff;
+      padding:1.2rem 2rem;
+      position:fixed;
+      width:100%;
+      top:0;
+      z-index:1100;
+      border-bottom:1px solid rgba(0,0,0,0.06);
+      transition:all .25s ease;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+    }
+    nav.scrolled{padding:.8rem 2rem;box-shadow:0 6px 18px rgba(0,0,0,0.04)}
 
-        nav {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
-            padding: 1.2rem 3rem;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-        }
+    .nav-left{display:flex;align-items:center;gap:1rem}
+    .brand{font-weight:600;letter-spacing:1px}
+    .nav-links{list-style:none;display:flex;gap:1.6rem;align-items:center}
+    .nav-links a{color:#000;text-decoration:none;font-weight:400;font-size:.85rem;letter-spacing:1px;text-transform:uppercase;position:relative}
+    .nav-links a::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:1px;background:#000;transition:width .25s ease}
+    .nav-links a:hover::after{width:100%}
 
-        nav.scrolled {
-            padding: 0.8rem 3rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        }
+    .nav-actions{display:flex;gap:.6rem;align-items:center}
+    .btn{padding:.6rem .95rem;border-radius:6px;font-size:.82rem;cursor:pointer;border:1px solid transparent;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem}
+    .btn-primary{background:#e63946;color:#fff;border-color:transparent}
+    .btn-ghost{background:transparent;border:1px solid rgba(0,0,0,0.08);color:#000}
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            gap: 2.5rem;
-        }
+    /* HERO */
+    .hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;overflow:hidden;padding:0 1.25rem}
+    .hero-bg{position:absolute;inset:0;background:linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23f5f5f5" width="1200" height="800"/></svg>');background-size:cover;background-position:center;z-index:0}
+    .hero-content{position:relative;z-index:1;opacity:0;animation:fadeInUp 1.2s ease forwards}
+    .hero h1{font-size:clamp(2rem,6vw,4.2rem);font-weight:300;letter-spacing:3px;color:#000;margin-bottom:.6rem}
+    .hero p{font-size:1rem;letter-spacing:1.6px;text-transform:uppercase;color:#666;font-weight:300;margin:0}
+    .hero .location{font-size:.9rem;color:#9a9a9a;margin-top:.45rem}
+    .scroll-indicator{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);font-size:.78rem;letter-spacing:2px;color:#666;animation:bounce 2s infinite}
 
-        nav a {
-            color: #1a1a1a;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-        }
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-8px)}}
 
-        nav a:hover {
-            color: #6366f1;
-        }
+    /* SECTIONS */
+    section{max-width:1200px;margin:0 auto;padding:110px 24px;opacity:0;transform:translateY(24px);transition:all .7s ease}
+    section.visible{opacity:1;transform:translateY(0)}
+    h2{font-size:1.8rem;margin-bottom:2rem;text-align:center;color:#000;font-weight:300;letter-spacing:3px;text-transform:uppercase}
 
-        /* Hero */
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #fff;
-            position: relative;
-            overflow: hidden;
-        }
+    /* ABOUT */
+    .about-content{display:grid;grid-template-columns:1fr 1.6fr;gap:3.2rem;align-items:center}
+    .profile-img{height:420px;background:#f5f5f5;overflow:hidden;position:relative;border-radius:8px;transition:transform .5s ease}
+    .profile-img:hover{transform:scale(1.02)}
+    .profile-placeholder{height:100%;display:flex;align-items:center;justify-content:center;font-size:5rem;color:#cfcfcf}
+    .about-text p{font-size:.98rem;line-height:1.9;color:#666;margin-bottom:1rem;font-weight:300}
+    .info-highlight{background:#f9f9f9;padding:1.2rem;margin-top:1.4rem;border-left:4px solid #000;border-radius:6px}
+    .info-highlight p{font-size:.92rem;margin-bottom:.35rem}
 
-        .floating-shape {
-            position: absolute;
-            border-radius: 50%;
-            opacity: 0.1;
-            animation: float 20s infinite ease-in-out;
-        }
+    /* SKILLS */
+    #skills{background:#f5f5f5}
+    .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0}
+    .skill-card{background:#fff;padding:2.2rem;border:1px solid #eee;position:relative;overflow:hidden;transition:all .35s ease}
+    .skill-card::before{content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;background:#000;transition:left .35s ease;z-index:0}
+    .skill-card:hover::before{left:0}
+    .skill-card h3,.skill-card p{position:relative;z-index:1;transition:color .35s ease}
+    .skill-card:hover h3,.skill-card:hover p{color:#fff}
+    .skill-card h3{font-size:1.05rem;margin-bottom:.8rem;font-weight:400;letter-spacing:1px;text-transform:uppercase}
+    .skill-card p{color:#666;line-height:1.7;font-weight:300}
 
-        .shape-1 { width: 300px; height: 300px; background: #fff; top: 10%; left: 10%; }
-        .shape-2 { width: 200px; height: 200px; background: #fff; top: 60%; right: 15%; animation-delay: 3s; }
-        .shape-3 { width: 150px; height: 150px; background: #fff; bottom: 20%; left: 20%; animation-delay: 6s; }
+    /* EXPERIENCE */
+    .experience-content{max-width:900px;margin:0 auto;text-align:center}
+    .experience-highlight{background:#fff;padding:2.2rem;border:1px solid #eee;margin-top:1.6rem;border-radius:8px}
+    .experience-highlight h3{font-size:2.6rem;font-weight:300;color:#000;margin-bottom:.6rem}
+    .experience-highlight p{font-size:1rem;color:#666;letter-spacing:1px}
 
-        @keyframes float {
-            0%, 100% { transform: translate(0,0); }
-            50% { transform: translate(20px, -20px); }
-        }
+    /* PROJECTS */
+    .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:1.25rem}
+    .project-card{position:relative;overflow:hidden;cursor:pointer;background:#f5f5f5;border-radius:8px}
+    .project-img{width:100%;height:360px;background:#e5e5e5;display:flex;align-items:center;justify-content:center;font-size:3rem;color:#ccc;background-size:cover;background-position:center;transition:transform .5s ease}
+    .project-card:hover .project-img{transform:scale(1.04)}
+    .project-img::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,0);transition:background .25s ease}
+    .project-card:hover .project-img::after{background:rgba(0,0,0,0.25)}
+    .play-icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:72px;height:72px;background:#e63946;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:2;transition:transform .2s ease}
+    .play-icon::before{content:"";width:0;height:0;border-left:22px solid #fff;border-top:13px solid transparent;border-bottom:13px solid transparent;margin-left:4px}
+    .project-info{padding:1.2rem;background:#fff;border-top:1px solid #eee}
+    .project-info h3{font-size:1.05rem;margin-bottom:.5rem;font-weight:400;letter-spacing:1px;text-transform:uppercase}
+    .project-info p{color:#666;line-height:1.6;font-weight:300}
 
-        .hero h1 {
-            font-size: 5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
+    /* VIDEO MODAL */
+    .video-modal{display:none;position:fixed;z-index:12000;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,0.9);align-items:center;justify-content:center;padding:2rem}
+    .video-modal.active{display:flex}
+    .video-modal-content{position:relative;width:95%;max-width:1100px}
+    .close-modal{position:absolute;top:-42px;right:0;color:#fff;font-size:40px;font-weight:300;cursor:pointer}
+    .video-container{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background:#000;border-radius:6px}
+    .video-container iframe{position:absolute;top:0;left:0;width:100%;height:100%}
 
-        .hero p {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-        }
+    /* CONTACT FORM */
+    #contact{background:#f5f5f5}
+    .contact-form{max-width:700px;margin:0 auto}
+    .contact-info{text-align:center;margin-bottom:1.4rem;padding:1.1rem;background:#fff;border:1px solid #eee;border-radius:8px}
+    .contact-info p{font-size:.95rem;color:#666;margin-bottom:.4rem;letter-spacing:1px}
+    .form-group{margin-bottom:1.4rem}
+    .form-group label{display:block;margin-bottom:.45rem;font-size:.82rem;letter-spacing:1px;text-transform:uppercase;font-weight:500;color:#333}
+    .form-group input,.form-group textarea{width:100%;padding:.9rem;border:none;border-bottom:1px solid #e7e7e7;background:transparent;font-size:1rem;font-family:inherit;transition:border-color .2s ease}
+    .form-group input:focus,.form-group textarea:focus{outline:none;border-bottom-color:#000}
+    .form-group textarea{min-height:140px;resize:vertical}
+    .submit-btn{background:#000;color:#fff;padding:.9rem 1.6rem;border:none;border-radius:6px;font-size:.9rem;letter-spacing:1.6px;text-transform:uppercase;cursor:pointer}
+    .submit-btn[disabled]{opacity:.6;cursor:default}
 
-        .cta-button {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            background: #fff;
-            color: #667eea;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
+    /* FOOTER */
+    footer{background:#000;color:#fff;text-align:center;padding:2rem;font-size:.85rem;letter-spacing:1px;border-top:4px solid rgba(255,255,255,0.02)}
 
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        section {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 120px 60px;
-        }
-
-        section h2 {
-            font-size: 3rem;
-            margin-bottom: 3rem;
-            text-align: center;
-        }
-
-        /* About */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 5rem;
-            align-items: center;
-        }
-
-        .profile-img {
-            width: 100%;
-            height: 500px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 8rem;
-        }
-
-        .about-text p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #4a5568;
-            margin-bottom: 1.5rem;
-        }
-
-        /* Contact */
-        #contact {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #fff;
-            border-radius: 50px;
-            margin: 60px;
-            padding: 80px;
-        }
-
-        #contact h2 { color: #fff; }
-
-        .contact-content {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 3rem;
-            justify-items: center;
-        }
-
-        iframe {
-            width: 100%;
-            height: 600px;
-            border: none;
-            border-radius: 20px;
-            background: #fff;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-        }
-
-        footer {
-            background: #1a1a1a;
-            color: #fff;
-            text-align: center;
-            padding: 3rem;
-            font-size: 0.95rem;
-        }
-
-        @media (max-width: 968px) {
-            .about-content { grid-template-columns: 1fr; }
-        }
-    </style>
+    /* Responsive */
+    @media(max-width:968px){
+      .about-content{grid-template-columns:1fr;gap:2rem}
+      section{padding:80px 20px}
+      .project-img{height:280px}
+      nav{padding:1rem 1rem}
+    }
+    @media(max-width:600px){
+      .hero h1{font-size:2rem;letter-spacing:2px}
+      .nav-links{display:none} /* mobile: hide center links to keep nav compact */
+      .nav-actions{gap:.4rem}
+      .profile-img{height:300px}
+      .project-img{height:200px}
+    }
+  </style>
 </head>
-
 <body>
+  <!-- Navigation -->
+  <nav id="navbar" aria-label="Main navigation">
+    <div class="nav-left">
+      <div class="brand">NITIN KUMAR</div>
+      <ul class="nav-links" role="menu" aria-hidden="false">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Expertise</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
 
-    <nav>
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
+    <div class="nav-actions">
+      <!-- View in new tab -->
+      <a class="btn btn-ghost" href="assets/Nitin-Kumar-CV.pdf" target="_blank" rel="noopener" aria-label="Open CV in new tab">
+        View CV
+      </a>
+      <!-- Download (user can edit filename) -->
+      <a class="btn btn-primary" href="assets/Nitin-Kumar-CV.pdf" download="Nitin-Kumar-CV.pdf" aria-label="Download CV as PDF">
+        Download CV
+      </a>
+    </div>
+  </nav>
 
-    <section class="hero">
-        <div class="floating-shape shape-1"></div>
-        <div class="floating-shape shape-2"></div>
-        <div class="floating-shape shape-3"></div>
+  <!-- Hero Section -->
+  <div class="hero" id="home" tabindex="-1">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-content" role="region" aria-label="Introduction">
+      <h1>NITIN KUMAR</h1>
+      <p>Creative Designer &amp; Video Editor</p>
+      <p class="location">Greater Noida, India</p>
+    </div>
+    <div class="scroll-indicator" aria-hidden="true">Scroll Down</div>
+  </div>
 
-        <h1>Nitin Kumar</h1>
-        <p>Creative Professional | Designer | Developer</p>
-        <a href="#contact" class="cta-button">Get in Touch</a>
-    </section>
+  <!-- About Section -->
+  <section id="about" aria-labelledby="about-heading">
+    <h2 id="about-heading">About</h2>
+    <div class="about-content">
+      <div class="profile-img" aria-hidden="true">
+        <div class="profile-placeholder">👤</div>
+      </div>
 
-    <section id="about">
-        <h2>About Me</h2>
-        <div class="about-content">
-            <div class="profile-img">👤</div>
-            <div class="about-text">
-                <p>Hello! I'm Nitin Kumar, a creative professional passionate about design, storytelling, and innovative experiences. I blend creativity with technology to make human-centered, meaningful designs.</p>
-                <p>My goal is to create experiences that connect people and ideas beautifully.</p>
-            </div>
+      <div class="about-text">
+        <p>
+          I'm Nitin Kumar, a 19-year-old creative professional based in Greater Noida with a passion
+          for visual storytelling and design excellence. With 2 years of hands-on experience, I work across
+          UI/UX, motion, graphics and video editing.
+        </p>
+        <p>
+          I blend technical proficiency with an artistic eye — crafting interfaces, color grading footage,
+          and building motion sequences with detail and purpose.
+        </p>
+        <p>
+          My aim: design that looks great and works even better.
+        </p>
+
+        <div class="info-highlight" aria-hidden="false">
+          <p><strong>Age:</strong> 19 Years</p>
+          <p><strong>Location:</strong> Greater Noida, India</p>
+          <p><strong>Experience:</strong> 2 Years</p>
+          <p><strong>Email:</strong> <a href="mailto:nitineditor232@gmail.com">nitineditor232@gmail.com</a></p>
+          <p><strong>Phone:</strong> <a href="tel:+919411906171">+91 9411906171</a></p>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <section id="contact">
-        <h2>Let's Connect</h2>
-        <div class="contact-content">
-            <!-- 🔹 Replace below link with your own Google Form embed link -->
-            <iframe src="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform?embedded=true">Loading…</iframe>
+  <!-- Skills Section -->
+  <section id="skills" aria-labelledby="skills-heading">
+    <h2 id="skills-heading">Expertise</h2>
+    <div class="skills-grid">
+      <div class="skill-card"><h3>UI/UX Design</h3><p>Intuitive, user-centered interfaces following modern standards.</p></div>
+      <div class="skill-card"><h3>Graphic Design</h3><p>Branding, identity and polished creative assets for digital & print.</p></div>
+      <div class="skill-card"><h3>Motion Design</h3><p>Animations and motion graphics that communicate clearly and delight.</p></div>
+      <div class="skill-card"><h3>Video Editing</h3><p>Advanced editing workflows, color grading, and storytelling through cut.</p></div>
+      <div class="skill-card"><h3>Colour Grading</h3><p>Cinematic looks and consistent color across projects.</p></div>
+      <div class="skill-card"><h3>Web Editing</h3><p>Optimized digital content for web platforms and faster load.</p></div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience" aria-labelledby="experience-heading">
+    <h2 id="experience-heading">Experience</h2>
+    <div class="experience-content">
+      <p style="font-size:1.02rem;color:#666;line-height:1.9;">
+        Over the last 2 years I've worked on a range of projects in UI/UX, motion, and video production,
+        collaborating with clients to deliver polished, on-brand creative work.
+      </p>
+
+      <div class="experience-highlight" aria-hidden="true">
+        <h3>2+</h3>
+        <p>YEARS OF CREATIVE EXPERIENCE</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" aria-labelledby="projects-heading">
+    <h2 id="projects-heading">Selected Work</h2>
+    <div class="projects-grid">
+      <!-- Video project cards (click to open modal) -->
+      <div class="project-card" onclick="openVideoModal('video1')" role="button" tabindex="0" aria-pressed="false">
+        <div class="project-img" style="background-image:url('https://img.youtube.com/vi/yS_KAfkAy7E/maxresdefault.jpg');" aria-hidden="true"></div>
+        <div class="play-icon" aria-hidden="true"></div>
+        <div class="project-info">
+          <h3>Video Editing - Project 1</h3>
+          <p>Professional editing and color grading showcase — click to watch.</p>
         </div>
-    </section>
+      </div>
 
-    <footer>
-        ©️ 2025 Nitin Kumar — All rights reserved.
-    </footer>
+      <div class="project-card" onclick="openVideoModal('video2')" role="button" tabindex="0" aria-pressed="false">
+        <div class="project-img" style="background-image:url('https://img.youtube.com/vi/SjUdL0KZTd0/maxresdefault.jpg');" aria-hidden="true"></div>
+        <div class="play-icon" aria-hidden="true"></div>
+        <div class="project-info">
+          <h3>Video Editing - Project 2</h3>
+          <p>Storytelling through seamless edits and motion integration.</p>
+        </div>
+      </div>
 
-    <script>
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            nav.classList.toggle('scrolled', window.scrollY > 50);
-        });
-    </script>
+      <div class="project-card" onclick="openVideoModal('video3')" role="button" tabindex="0" aria-pressed="false">
+        <div class="project-img" style="background-image:url('https://img.youtube.com/vi/ZGYZ5iq2X9Q/maxresdefault.jpg');" aria-hidden="true"></div>
+        <div class="play-icon" aria-hidden="true"></div>
+        <div class="project-info">
+          <h3>Video Editing - Project 3</h3>
+          <p>Dynamic edits with motion graphics and sound design.</p>
+        </div>
+      </div>
 
+      <div class="project-card">
+        <div class="project-img">🎨</div>
+        <div class="project-info"><h3>UI/UX Design</h3><p>Complete product flows and visual systems for apps & websites.</p></div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-img">✨</div>
+        <div class="project-info"><h3>Motion Design</h3><p>Animated brand assets and explainer sequences.</p></div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-img">🎯</div>
+        <div class="project-info"><h3>Graphic Design</h3><p>Brand identity, posters, thumbnails and visual systems.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Modal -->
+  <div id="videoModal" class="video-modal" onclick="closeVideoModal()" aria-hidden="true">
+    <div class="video-modal-content" onclick="event.stopPropagation()">
+      <button class="close-modal" onclick="closeVideoModal()" aria-label="Close video modal">&times;</button>
+      <div class="video-container">
+        <iframe id="videoFrame" src="" title="Project video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Section -->
+  <section id="contact" aria-labelledby="contact-heading">
+    <h2 id="contact-heading">Get In Touch</h2>
+    <div class="contact-info">
+      <p><strong>EMAIL:</strong> <a href="mailto:nitineditor232@gmail.com">nitineditor232@gmail.com</a></p>
+      <p><strong>PHONE:</strong> <a href="tel:+919411906171">+91 9411906171</a></p>
+      <p><strong>LOCATION:</strong> Greater Noida, India</p>
+    </div>
+
+    <form class="contact-form" id="contactForm" action="https://formspree.io/f/xvgvgppo" method="POST">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" required />
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required />
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" required></textarea>
+      </div>
+      <button class="submit-btn" type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Nitin Kumar. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    // Smooth scrolling for same-page links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (!target) return;
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // close any mobile nav if you add one later
+      });
+    });
+
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) navbar.classList.add('scrolled');
+      else navbar.classList.remove('scrolled');
+    });
+
+    // Intersection observer for section reveals
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -80px 0px' });
+    document.querySelectorAll('section').forEach(s => observer.observe(s));
+
+    // FORM: visual sending state (Formspree will handle actual submit)
+    const contactForm = document.getElementById('contactForm');
+    contactForm.addEventListener('submit', function (e) {
+      const btn = this.querySelector('.submit-btn');
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+      // Let Formspree proceed with the submission (no preventDefault)
+    });
+
+    // VIDEO MODAL logic
+    const videos = {
+      'video1': 'yS_KAfkAy7E',
+      'video2': 'SjUdL0KZTd0',
+      'video3': 'ZGYZ5iq2X9Q'
+    };
+
+    function openVideoModal(id) {
+      const modal = document.getElementById('videoModal');
+      const iframe = document.getElementById('videoFrame');
+      const videoId = videos[id];
+      if (!videoId) return;
+      iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1`;
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeVideoModal() {
+      const modal = document.getElementById('videoModal');
+      const iframe = document.getElementById('videoFrame');
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden','true');
+      iframe.src = '';
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close modal with Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeVideoModal();
+    });
+
+    // Allow keyboard activation on project cards
+    document.querySelectorAll('.project-card[role="button"]').forEach(card => {
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') card.click();
+      });
+    });
+  </script>
 </body>
 </html>
