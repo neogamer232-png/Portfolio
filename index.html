@@ -1,156 +1,383 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Nitin Kumar — Creative Professional</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Nitin Kumar — Creative Designer & Video Editor. UI/UX, Motion, Video Editing, Colour Grading." />
   <meta name="theme-color" content="#000000" />
+  <meta property="og:title" content="Nitin Kumar — Creative Professional" />
+  <meta property="og:description" content="UI/UX Designer & Video Editor | Greater Noida, India" />
+  <meta property="og:image" content="https://yourdomain.com/og-image.jpg" />
+  <meta property="og:url" content="https://yourdomain.com" />
+  <title>Nitin Kumar — Creative Professional</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
-    /* Reset & base */
-    *{margin:0;padding:0;box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      font-family:"Helvetica Neue",Arial,sans-serif;
-      line-height:1.6;
-      color:#0b0b0b;
-      background:#fff;
-      overflow-x:hidden;
-      -webkit-font-smoothing:antialiased;
+    /* Reset & Base */
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.7;
+      color: #0b0b0b;
+      background: #fff;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
     }
 
     /* NAV */
-    nav{
-      background:#fff;
-      padding:1.2rem 2rem;
-      position:fixed;
-      width:100%;
-      top:0;
-      z-index:1100;
-      border-bottom:1px solid rgba(0,0,0,0.06);
-      transition:all .25s ease;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:1rem;
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: #fff;
+      padding: 1.2rem 2rem;
+      z-index: 1100;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      transition: all .25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
     }
-    nav.scrolled{padding:.8rem 2rem;box-shadow:0 6px 18px rgba(0,0,0,0.04)}
+    nav.scrolled { padding: .8rem 2rem; box-shadow: 0 6px 18px rgba(0,0,0,0.04); }
 
-    .nav-left{display:flex;align-items:center;gap:1rem}
-    .brand{font-weight:600;letter-spacing:1px}
-    .nav-links{list-style:none;display:flex;gap:1.6rem;align-items:center}
-    .nav-links a{color:#000;text-decoration:none;font-weight:400;font-size:.85rem;letter-spacing:1px;text-transform:uppercase;position:relative}
-    .nav-links a::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:1px;background:#000;transition:width .25s ease}
-    .nav-links a:hover::after{width:100%}
+    .nav-left { display: flex; align-items: center; gap: 1.5rem; }
+    .brand { font-weight: 600; letter-spacing: 1px; font-size: 1.1rem; }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.8rem;
+      align-items: center;
+    }
+    .nav-links a {
+      color: #000;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: .85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0; bottom: -5px;
+      width: 0; height: 1px;
+      background: #000;
+      transition: width .25s ease;
+    }
+    .nav-links a:hover::after { width: 100%; }
 
-    .nav-actions{display:flex;gap:.6rem;align-items:center}
-    .btn{padding:.6rem .95rem;border-radius:6px;font-size:.82rem;cursor:pointer;border:1px solid transparent;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem}
-    .btn-primary{background:#e63946;color:#fff;border-color:transparent}
-    .btn-ghost{background:transparent;border:1px solid rgba(0,0,0,0.08);color:#000}
+    .nav-actions { display: flex; gap: .8rem; align-items: center; position: relative; }
+
+    .btn {
+      padding: .6rem .95rem;
+      border-radius: 6px;
+      font-size: .82rem;
+      cursor: pointer;
+      border: 1px solid transparent;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      transition: all .2s ease;
+    }
+    .btn-primary { background: #e63946; color: #fff; }
+    .btn-ghost { background: transparent; border: 1px solid rgba(0,0,0,0.08); color: #000; }
+
+    /* Mobile Menu Toggle */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #000;
+    }
+
+    /* Asset Trigger */
+    .asset-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.06);
+      padding: .5rem .6rem;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.03);
+      transition: transform .15s ease, box-shadow .15s ease;
+      font-size: .85rem;
+      font-weight: 600;
+      letter-spacing: .6px;
+    }
+    .asset-trigger:active { transform: translateY(1px); }
+    .asset-icon {
+      width: 18px; height: 18px;
+      position: relative;
+    }
+    .asset-icon::before {
+      content: ""; position: absolute; left: 0; top: 0;
+      width: 14px; height: 18px; border-radius: 2px;
+      border: 2px solid #111; box-sizing: border-box;
+    }
+    .asset-icon::after {
+      content: ""; position: absolute; right: -1px; top: -2px;
+      width: 6px; height: 6px;
+      border-left: 2px solid #111; border-top: 2px solid #111;
+      border-top-left-radius: 2px;
+    }
+
+    /* Dropdown */
+    .asset-dropdown {
+      position: absolute;
+      right: 0; top: calc(100% + 12px);
+      min-width: 320px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 18px 50px rgba(10,10,10,0.08);
+      border: 1px solid rgba(0,0,0,0.06);
+      padding: .6rem;
+      display: none;
+      z-index: 1200;
+    }
+    .asset-dropdown.active { display: block; }
+
+    .asset-row {
+      display: flex; gap: .75rem; align-items: center;
+      padding: .55rem; border-radius: 8px;
+      transition: background .15s ease;
+    }
+    .asset-row:hover { background: rgba(0,0,0,0.02); }
+    .asset-thumb {
+      width: 56px; height: 56px; border-radius: 8px;
+      background: #f5f5f5; display: flex;
+      align-items: center; justify-content: center;
+      font-weight: 600; color: #cfcfcf;
+    }
+    .asset-meta { flex: 1; }
+    .asset-meta .title { font-weight: 600; font-size: .95rem; }
+    .asset-meta .sub { font-size: .78rem; color: #777; }
+    .asset-controls { display: flex; gap: .5rem; }
+    .small-btn {
+      padding: .45rem .6rem; border-radius: 8px;
+      font-size: .78rem; border: 1px solid rgba(0,0,0,0.06);
+      background: transparent; cursor: pointer;
+      transition: all .15s ease;
+    }
+    .small-btn:hover { background: rgba(0,0,0,0.05); }
+
+    .asset-footer {
+      display: flex; justify-content: space-between;
+      align-items: center; padding-top: .45rem;
+      border-top: 1px dashed rgba(0,0,0,0.04);
+      margin-top: .45rem; font-size: .84rem; color: #666;
+    }
 
     /* HERO */
-    .hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;overflow:hidden;padding:0 1.25rem}
-    .hero-bg{position:absolute;inset:0;background:linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23f5f5f5" width="1200" height="800"/></svg>');background-size:cover;background-position:center;z-index:0}
-    .hero-content{position:relative;z-index:1;opacity:0;animation:fadeInUp 1.2s ease forwards}
-    .hero h1{font-size:clamp(2rem,6vw,4.2rem);font-weight:300;letter-spacing:3px;color:#000;margin-bottom:.6rem}
-    .hero p{font-size:1rem;letter-spacing:1.6px;text-transform:uppercase;color:#666;font-weight:300;margin:0}
-    .hero .location{font-size:.9rem;color:#9a9a9a;margin-top:.45rem}
-    .scroll-indicator{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);font-size:.78rem;letter-spacing:2px;color:#666;animation:bounce 2s infinite}
+    .hero {
+      height: 100vh; display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      text-align: center; position: relative; overflow: hidden;
+      padding: 0 1.25rem;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%),
+                  url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23f5f5f5" width="1200" height="800"/></svg>');
+      background-size: cover; background-position: center; z-index: 0;
+    }
+    .bubbles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
+    .bubble {
+      position: absolute; border-radius: 50%; background: rgba(10,10,10,0.06);
+      filter: blur(8px); transform: translate3d(0,0,0);
+      animation: floatMove linear infinite; will-change: transform, opacity; opacity: 0.95;
+    }
+    .bubble.b1 { width:220px; height:220px; left:6%; top:18%; animation-duration:18s; }
+    .bubble.b2 { width:180px; height:180px; left:72%; top:12%; animation-duration:22s; animation-delay:2s; }
+    .bubble.b3 { width:240px; height:240px; left:15%; top:65%; animation-duration:20s; animation-delay:4s; }
+    .bubble.b4 { width:160px; height:160px; left:80%; top:70%; animation-duration:16s; animation-delay:1s; }
+    .bubble.b5 { width:200px; height:200px; left:45%; top:25%; animation-duration:24s; animation-delay:3s; }
+    .bubble.b6 { width:140px; height:140px; left:30%; top:80%; animation-duration:19s; animation-delay:5s; }
+    .bubble.b7 { width:190px; height:190px; left:60%; top:55%; animation-duration:21s; animation-delay:6s; }
+    .bubble.b8 { width:170px; height:170px; left:88%; top:30%; animation-duration:17s; animation-delay:7s; }
 
-    @keyframes fadeInUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
-    @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-8px)}}
+    .hero-content { position: relative; z-index: 1; opacity: 0; animation: fadeInUp 1.2s ease forwards; }
+    .hero h1 { font-size: clamp(2rem, 6vw, 4.2rem); font-weight: 300; letter-spacing: 3px; color: #000; margin-bottom: .6rem; }
+    .hero p { font-size: 1rem; letter-spacing: 1.6px; text-transform: uppercase; color: #666; font-weight: 300; margin: 0; }
+    .hero .location { font-size: .9rem; color: #9a9a9a; margin-top: .45rem; }
+    .scroll-indicator {
+      position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+      font-size: .78rem; letter-spacing: 2px; color: #666;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes fadeInUp { from { opacity:0; transform:translateY(40px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes bounce { 0%,100% { transform:translateX(-50%) translateY(0); } 50% { transform:translateX(-50%) translateY(-8px); } }
+    @keyframes floatMove {
+      0% { transform: translateY(0) translateX(0) scale(1); opacity:0.95; }
+      25% { transform: translateY(-18px) translateX(8px) scale(1.02); opacity:0.9; }
+      50% { transform: translateY(6px) translateX(-12px) scale(0.98); opacity:0.85; }
+      75% { transform: translateY(-10px) translateX(6px) scale(1.01); opacity:0.9; }
+      100% { transform: translateY(0) translateX(0) scale(1); opacity:0.95; }
+    }
 
     /* SECTIONS */
-    section{max-width:1200px;margin:0 auto;padding:110px 24px;opacity:0;transform:translateY(24px);transition:all .7s ease}
-    section.visible{opacity:1;transform:translateY(0)}
-    h2{font-size:1.8rem;margin-bottom:2rem;text-align:center;color:#000;font-weight:300;letter-spacing:3px;text-transform:uppercase}
+    section {
+      max-width: 1200px; margin: 0 auto; padding: 110px 24px;
+      opacity: 0; transform: translateY(24px); transition: all .7s ease;
+    }
+    section.visible { opacity:1; transform:translateY(0); }
+    h2 {
+      font-size: 1.8rem; margin-bottom: 2rem; text-align: center;
+      color: #000; font-weight: 300; letter-spacing: 3px; text-transform: uppercase;
+    }
 
     /* ABOUT */
-    .about-content{display:grid;grid-template-columns:1fr 1.6fr;gap:3.2rem;align-items:center}
-    .profile-img{height:420px;background:#f5f5f5;overflow:hidden;position:relative;border-radius:8px;transition:transform .5s ease}
-    .profile-img:hover{transform:scale(1.02)}
-    .profile-placeholder{height:100%;display:flex;align-items:center;justify-content:center;font-size:5rem;color:#cfcfcf}
-    .about-text p{font-size:.98rem;line-height:1.9;color:#666;margin-bottom:1rem;font-weight:300}
-    .info-highlight{background:#f9f9f9;padding:1.2rem;margin-top:1.4rem;border-left:4px solid #000;border-radius:6px}
-    .info-highlight p{font-size:.92rem;margin-bottom:.35rem}
+    .about-content { display: grid; grid-template-columns: 1fr 1.6fr; gap: 3.2rem; align-items: center; }
+    .profile-img {
+      height: 420px; background: #f5f5f5; overflow: hidden;
+      position: relative; border-radius: 8px; transition: transform .5s ease;
+    }
+    .profile-img:hover { transform: scale(1.02); }
+    .profile-placeholder {
+      height: 100%; display: flex; align-items: center; justify-content: center;
+      font-size: 5rem; color: #cfcfcf;
+    }
+    .about-text p { font-size: .98rem; line-height: 1.9; color: #666; margin-bottom: 1rem; font-weight: 300; }
+    .info-highlight {
+      background: #f9f9f9; padding: 1.2rem; margin-top: 1.4rem;
+      border-left: 4px solid #000; border-radius: 6px;
+    }
+    .info-highlight p { font-size: .92rem; margin-bottom: .35rem; }
 
     /* SKILLS */
-    #skills{background:#f5f5f5}
-    .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0}
-    .skill-card{background:#fff;padding:2.2rem;border:1px solid #eee;position:relative;overflow:hidden;transition:all .35s ease}
-    .skill-card::before{content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;background:#000;transition:left .35s ease;z-index:0}
-    .skill-card:hover::before{left:0}
-    .skill-card h3,.skill-card p{position:relative;z-index:1;transition:color .35s ease}
-    .skill-card:hover h3,.skill-card:hover p{color:#fff}
-    .skill-card h3{font-size:1.05rem;margin-bottom:.8rem;font-weight:400;letter-spacing:1px;text-transform:uppercase}
-    .skill-card p{color:#666;line-height:1.7;font-weight:300}
-
-    /* EXPERIENCE */
-    .experience-content{max-width:900px;margin:0 auto;text-align:center}
-    .experience-highlight{background:#fff;padding:2.2rem;border:1px solid #eee;margin-top:1.6rem;border-radius:8px}
-    .experience-highlight h3{font-size:2.6rem;font-weight:300;color:#000;margin-bottom:.6rem}
-    .experience-highlight p{font-size:1rem;color:#666;letter-spacing:1px}
+    #skills { background: #f5f5f5; }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0; }
+    .skill-card {
+      background: #fff; padding: 2.2rem; border: 1px solid #eee;
+      position: relative; overflow: hidden; transition: all .35s ease;
+    }
+    .skill-card::before {
+      content: ""; position: absolute; top: 0; left: -100%;
+      width: 100%; height: 100%; background: #000; transition: left .35s ease; z-index: 0;
+    }
+    .skill-card:hover::before { left: 0; }
+    .skill-card h3, .skill-card p { position: relative; z-index: 1; transition: color .35s ease; }
+    .skill-card:hover h3, .skill-card:hover p { color: #fff; }
+    .skill-card h3 { font-size: 1.05rem; margin-bottom: .8rem; font-weight: 400; letter-spacing: 1px; text-transform: uppercase; }
+    .skill-card p { color: #666; line-height: 1.7; font-weight: 300; }
 
     /* PROJECTS */
-    .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:1.25rem}
-    .project-card{position:relative;overflow:hidden;cursor:pointer;background:#f5f5f5;border-radius:8px}
-    .project-img{width:100%;height:360px;background:#e5e5e5;display:flex;align-items:center;justify-content:center;font-size:3rem;color:#ccc;background-size:cover;background-position:center;transition:transform .5s ease}
-    .project-card:hover .project-img{transform:scale(1.04)}
-    .project-img::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,0);transition:background .25s ease}
-    .project-card:hover .project-img::after{background:rgba(0,0,0,0.25)}
-    .play-icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:72px;height:72px;background:#e63946;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:2;transition:transform .2s ease}
-    .play-icon::before{content:"";width:0;height:0;border-left:22px solid #fff;border-top:13px solid transparent;border-bottom:13px solid transparent;margin-left:4px}
-    .project-info{padding:1.2rem;background:#fff;border-top:1px solid #eee}
-    .project-info h3{font-size:1.05rem;margin-bottom:.5rem;font-weight:400;letter-spacing:1px;text-transform:uppercase}
-    .project-info p{color:#666;line-height:1.6;font-weight:300}
-
-    /* VIDEO MODAL */
-    .video-modal{display:none;position:fixed;z-index:12000;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,0.9);align-items:center;justify-content:center;padding:2rem}
-    .video-modal.active{display:flex}
-    .video-modal-content{position:relative;width:95%;max-width:1100px}
-    .close-modal{position:absolute;top:-42px;right:0;color:#fff;font-size:40px;font-weight:300;cursor:pointer}
-    .video-container{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background:#000;border-radius:6px}
-    .video-container iframe{position:absolute;top:0;left:0;width:100%;height:100%}
-
-    /* CONTACT FORM */
-    #contact{background:#f5f5f5}
-    .contact-form{max-width:700px;margin:0 auto}
-    .contact-info{text-align:center;margin-bottom:1.4rem;padding:1.1rem;background:#fff;border:1px solid #eee;border-radius:8px}
-    .contact-info p{font-size:.95rem;color:#666;margin-bottom:.4rem;letter-spacing:1px}
-    .form-group{margin-bottom:1.4rem}
-    .form-group label{display:block;margin-bottom:.45rem;font-size:.82rem;letter-spacing:1px;text-transform:uppercase;font-weight:500;color:#333}
-    .form-group input,.form-group textarea{width:100%;padding:.9rem;border:none;border-bottom:1px solid #e7e7e7;background:transparent;font-size:1rem;font-family:inherit;transition:border-color .2s ease}
-    .form-group input:focus,.form-group textarea:focus{outline:none;border-bottom-color:#000}
-    .form-group textarea{min-height:140px;resize:vertical}
-    .submit-btn{background:#000;color:#fff;padding:.9rem 1.6rem;border:none;border-radius:6px;font-size:.9rem;letter-spacing:1.6px;text-transform:uppercase;cursor:pointer}
-    .submit-btn[disabled]{opacity:.6;cursor:default}
-
-    /* FOOTER */
-    footer{background:#000;color:#fff;text-align:center;padding:2rem;font-size:.85rem;letter-spacing:1px;border-top:4px solid rgba(255,255,255,0.02)}
-
-    /* Responsive */
-    @media(max-width:968px){
-      .about-content{grid-template-columns:1fr;gap:2rem}
-      section{padding:80px 20px}
-      .project-img{height:280px}
-      nav{padding:1rem 1rem}
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 1.25rem; }
+    .project-card {
+      position: relative; overflow: hidden; cursor: pointer;
+      background: #f5f5f5; border-radius: 8px;
     }
-    @media(max-width:600px){
-      .hero h1{font-size:2rem;letter-spacing:2px}
-      .nav-links{display:none} /* mobile: hide center links to keep nav compact */
-      .nav-actions{gap:.4rem}
-      .profile-img{height:300px}
-      .project-img{height:200px}
+    .project-img {
+      width: 100%; height: 360px; background: #e5e5e5;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem; color: #ccc; background-size: cover;
+      background-position: center; transition: transform .5s ease;
+    }
+    .project-card:hover .project-img { transform: scale(1.04); }
+    .project-info { padding: 1.2rem; background: #fff; border-top: 1px solid #eee; }
+    .project-info h3 { font-size: 1.05rem; margin-bottom: .5rem; font-weight: 400; letter-spacing: 1px; text-transform: uppercase; }
+    .project-info p { color: #666; line-height: 1.6; font-weight: 300; }
+
+    /* MODALS */
+    .modal {
+      display: none; position: fixed; z-index: 12000;
+      left: 0; top: 0; width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.9); align-items: center;
+      justify-content: center; padding: 2rem;
+    }
+    .modal.active { display: flex; }
+    .modal-content {
+      position: relative; width: 95%; max-width: 1100px;
+    }
+    .close-modal {
+      position: absolute; top: -42px; right: 0;
+      color: #fff; font-size: 40px; font-weight: 300;
+      cursor: pointer; background: none; border: none;
+    }
+    .video-container {
+      position: relative; padding-bottom: 56.25%; height: 0;
+      overflow: hidden; background: #000; border-radius: 6px;
+    }
+    .video-container iframe {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    }
+
+    /* CONTACT */
+    #contact { background: #f5f5f5; }
+    .contact-form { max-width: 700px; margin: 0 auto; }
+    .contact-info {
+      text-align: center; margin-bottom: 1.4rem;
+      padding: 1.1rem; background: #fff; border: 1px solid #eee;
+      border-radius: 8px;
+    }
+    .contact-info p { font-size: .95rem; color: #666; margin-bottom: .4rem; letter-spacing: 1px; }
+    .form-group { margin-bottom: 1.4rem; }
+    .form-group label {
+      display: block; margin-bottom: .45rem; font-size: .82rem;
+      letter-spacing: 1px; text-transform: uppercase; font-weight: 500; color: #333;
+    }
+    .form-group input, .form-group textarea {
+      width: 100%; padding: .9rem; border: none;
+      border-bottom: 1px solid #e7e7e7; background: transparent;
+      font-size: 1rem; font-family: inherit; transition: border-color .2s ease;
+    }
+    .form-group input:focus, .form-group textarea:focus {
+      outline: none; border-bottom-color: #000;
+    }
+    .form-group textarea { min-height: 140px; resize: vertical; }
+    .submit-btn {
+      background: #000; color: #fff; padding: .9rem 1.6rem;
+      border: none; border-radius: 6px; font-size: .9rem;
+      letter-spacing: 1.6px; text-transform: uppercase; cursor: pointer;
+    }
+    .submit-btn[disabled] { opacity: .6; cursor: default; }
+
+    footer {
+      background: #000; color: #fff; text-align: center;
+      padding: 2rem; font-size: .85rem; letter-spacing: 1px;
+      border-top: 4px solid rgba(255,255,255,0.02);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 968px) {
+      .about-content { grid-template-columns: 1fr; gap: 2rem; }
+      section { padding: 80px 20px; }
+      .project-img { height: 280px; }
+      nav { padding: 1rem; }
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2rem; letter-spacing: 2px; }
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #fff; padding: 1rem; border-top: 1px solid #eee; }
+      .nav-links.active { display: flex; }
+      .nav-links a { padding: .75rem 0; font-size: .9rem; }
+      .menu-toggle { display: block; }
+      .profile-img { height: 300px; }
+      .project-img { height: 200px; }
+      .bubble { filter: blur(6px); opacity: 0.85; }
+      .bubble.b1, .bubble.b3, .bubble.b7 { width: 160px; height: 160px; }
     }
   </style>
 </head>
 <body>
+
   <!-- Navigation -->
   <nav id="navbar" aria-label="Main navigation">
     <div class="nav-left">
       <div class="brand">NITIN KUMAR</div>
-      <ul class="nav-links" role="menu" aria-hidden="false">
+      <ul class="nav-links" id="navLinks" role="menu">
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#skills">Expertise</a></li>
@@ -159,53 +386,71 @@
         <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
-
     <div class="nav-actions">
-      <!-- View in new tab -->
-      <a class="btn btn-ghost" href="assets/Nitin-Kumar-CV.pdf" target="_blank" rel="noopener" aria-label="Open CV in new tab">
-        View CV
-      </a>
-      <!-- Download (user can edit filename) -->
-      <a class="btn btn-primary" href="assets/Nitin-Kumar-CV.pdf" download="Nitin-Kumar-CV.pdf" aria-label="Download CV as PDF">
-        Download CV
-      </a>
+      <button id="menuToggle" class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <button id="assetTrigger" class="asset-trigger" aria-haspopup="true" aria-expanded="false" aria-controls="assetDropdown" title="Resume & CV">
+        <span class="asset-icon" aria-hidden="true"></span>
+        <span>Docs</span>
+      </button>
+      <div id="assetDropdown" class="asset-dropdown" role="menu" aria-hidden="true">
+        <div class="asset-row" role="none">
+          <div class="asset-thumb">R</div>
+          <div class="asset-meta">
+            <div class="title">Resume — One page</div>
+            <div class="sub">Concise summary · ideal for quick reviews</div>
+          </div>
+          <div class="asset-controls">
+            <button class="small-btn" data-preview="assets/Nitin-Kumar-Resume.pdf" aria-label="Preview Resume">Preview</button>
+            <a class="small-btn" href="assets/Nitin-Kumar-Resume.pdf" target="_blank" rel="noopener">Open</a>
+            <a class="small-btn" href="assets/Nitin-Kumar-Resume.pdf" download="Nitin-Kumar-Resume.pdf">Download</a>
+          </div>
+        </div>
+        <div class="asset-row" role="none">
+          <div class="asset-thumb">CV</div>
+          <div class="asset-meta">
+            <div class="title">CV — Full details</div>
+            <div class="sub">Projects, experience & links</div>
+          </div>
+          <div class="asset-controls">
+            <button class="small-btn" data-preview="assets/Nitin-Kumar-CV.pdf" aria-label="Preview CV">Preview</button>
+            <a class="small-btn" href="assets/Nitin-Kumar-CV.pdf" target="_blank" rel="noopener">Open</a>
+            <a class="small-btn" href="assets/Nitin-Kumar-CV.pdf" download="Nitin-Kumar-CV.pdf">Download</a>
+          </div>
+        </div>
+        <div class="asset-footer">
+          <div>Prefer a recruiter-friendly view?</div>
+          <div style="font-weight:600;color:#e63946">Preview inside page</div>
+        </div>
+      </div>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <div class="hero" id="home" tabindex="-1">
+  <!-- Hero -->
+  <div class="hero" id="home">
     <div class="hero-bg" aria-hidden="true"></div>
-    <div class="hero-content" role="region" aria-label="Introduction">
+    <div class="bubbles" aria-hidden="true">
+      <span class="bubble b1"></span><span class="bubble b2"></span><span class="bubble b3"></span>
+      <span class="bubble b4"></span><span class="bubble b5"></span><span class="bubble b6"></span>
+      <span class="bubble b7"></span><span class="bubble b8"></span>
+    </div>
+    <div class="hero-content">
       <h1>NITIN KUMAR</h1>
-      <p>Creative Designer &amp; Video Editor</p>
+      <p>Creative Designer & Video Editor</p>
       <p class="location">Greater Noida, India</p>
     </div>
     <div class="scroll-indicator" aria-hidden="true">Scroll Down</div>
   </div>
 
-  <!-- About Section -->
+  <!-- About -->
   <section id="about" aria-labelledby="about-heading">
     <h2 id="about-heading">About</h2>
     <div class="about-content">
-      <div class="profile-img" aria-hidden="true">
-        <div class="profile-placeholder">👤</div>
-      </div>
-
+      <div class="profile-img"><div class="profile-placeholder">Photo</div></div>
       <div class="about-text">
-        <p>
-          I'm Nitin Kumar, a 19-year-old creative professional based in Greater Noida with a passion
-          for visual storytelling and design excellence. With 2 years of hands-on experience, I work across
-          UI/UX, motion, graphics and video editing.
-        </p>
-        <p>
-          I blend technical proficiency with an artistic eye — crafting interfaces, color grading footage,
-          and building motion sequences with detail and purpose.
-        </p>
-        <p>
-          My aim: design that looks great and works even better.
-        </p>
-
-        <div class="info-highlight" aria-hidden="false">
+        <p>I'm Nitin Kumar, a 19-year-old creative professional based in Greater Noida with a passion for visual storytelling and design excellence. With 2 years of hands-on experience, I work across UI/UX, motion, graphics and video editing.</p>
+        <p>I blend technical proficiency with an artistic eye — crafting interfaces, color grading footage, and building motion sequences with detail and purpose.</p>
+        <p>My aim: design that looks great and works even better.</p>
+        <div class="info-highlight">
           <p><strong>Age:</strong> 19 Years</p>
           <p><strong>Location:</strong> Greater Noida, India</p>
           <p><strong>Experience:</strong> 2 Years</p>
@@ -216,7 +461,7 @@
     </div>
   </section>
 
-  <!-- Skills Section -->
+  <!-- Skills -->
   <section id="skills" aria-labelledby="skills-heading">
     <h2 id="skills-heading">Expertise</h2>
     <div class="skills-grid">
@@ -229,82 +474,66 @@
     </div>
   </section>
 
-  <!-- Experience Section -->
+  <!-- Experience -->
   <section id="experience" aria-labelledby="experience-heading">
     <h2 id="experience-heading">Experience</h2>
-    <div class="experience-content">
-      <p style="font-size:1.02rem;color:#666;line-height:1.9;">
-        Over the last 2 years I've worked on a range of projects in UI/UX, motion, and video production,
-        collaborating with clients to deliver polished, on-brand creative work.
-      </p>
-
-      <div class="experience-highlight" aria-hidden="true">
-        <h3>2+</h3>
-        <p>YEARS OF CREATIVE EXPERIENCE</p>
-      </div>
+    <div style="text-align:center; font-size:1.02rem; color:#666; line-height:1.9; max-width:800px; margin:0 auto;">
+      Over the last 2 years I've worked on a range of projects in UI/UX, motion, and video production, collaborating with clients to deliver polished, on-brand creative work.
+      <div style="margin-top:2rem; font-size:3rem; font-weight:300;">2+</div>
+      <p>YEARS OF CREATIVE EXPERIENCE</p>
     </div>
   </section>
 
-  <!-- Projects Section -->
+  <!-- Projects -->
   <section id="projects" aria-labelledby="projects-heading">
     <h2 id="projects-heading">Selected Work</h2>
     <div class="projects-grid">
-      <!-- Video project cards (click to open modal) -->
-      <div class="project-card" onclick="openVideoModal('video1')" role="button" tabindex="0" aria-pressed="false">
-        <div class="project-img" style="background-image:url('https://img.youtube.com/vi/yS_KAfkAy7E/maxresdefault.jpg');" aria-hidden="true"></div>
-        <div class="play-icon" aria-hidden="true"></div>
-        <div class="project-info">
-          <h3>Video Editing - Project 1</h3>
-          <p>Professional editing and color grading showcase — click to watch.</p>
-        </div>
+      <div class="project-card" onclick="openVideoModal('video1')" role="button" tabindex="0">
+        <div class="project-img" style="background-image:url('https://img.youtube.com/vi/yS_KAfkAy7E/maxresdefault.jpg');"></div>
+        <div class="project-info"><h3>Video Editing - Project 1</h3><p>Professional editing and color grading showcase — click to watch.</p></div>
       </div>
-
-      <div class="project-card" onclick="openVideoModal('video2')" role="button" tabindex="0" aria-pressed="false">
-        <div class="project-img" style="background-image:url('https://img.youtube.com/vi/SjUdL0KZTd0/maxresdefault.jpg');" aria-hidden="true"></div>
-        <div class="play-icon" aria-hidden="true"></div>
-        <div class="project-info">
-          <h3>Video Editing - Project 2</h3>
-          <p>Storytelling through seamless edits and motion integration.</p>
-        </div>
+      <div class="project-card" onclick="openVideoModal('video2')" role="button" tabindex="0">
+        <div class="project-img" style="background-image:url('https://img.youtube.com/vi/SjUdL0KZTd0/maxresdefault.jpg');"></div>
+        <div class="project-info"><h3>Video Editing - Project 2</h3><p>Storytelling through seamless edits and motion integration.</p></div>
       </div>
-
-      <div class="project-card" onclick="openVideoModal('video3')" role="button" tabindex="0" aria-pressed="false">
-        <div class="project-img" style="background-image:url('https://img.youtube.com/vi/ZGYZ5iq2X9Q/maxresdefault.jpg');" aria-hidden="true"></div>
-        <div class="play-icon" aria-hidden="true"></div>
-        <div class="project-info">
-          <h3>Video Editing - Project 3</h3>
-          <p>Dynamic edits with motion graphics and sound design.</p>
-        </div>
+      <div class="project-card" onclick="openVideoModal('video3')" role="button" tabindex="0">
+        <div class="project-img" style="background-image:url('https://img.youtube.com/vi/ZGYZ5iq2X9Q/maxresdefault.jpg');"></div>
+        <div class="project-info"><h3>Video Editing - Project 3</h3><p>Dynamic edits with motion graphics and sound design.</p></div>
       </div>
-
-      <div class="project-card">
-        <div class="project-img">🎨</div>
-        <div class="project-info"><h3>UI/UX Design</h3><p>Complete product flows and visual systems for apps & websites.</p></div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-img">✨</div>
-        <div class="project-info"><h3>Motion Design</h3><p>Animated brand assets and explainer sequences.</p></div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-img">🎯</div>
-        <div class="project-info"><h3>Graphic Design</h3><p>Brand identity, posters, thumbnails and visual systems.</p></div>
-      </div>
+      <div class="project-card"><div class="project-img">UI/UX</div><div class="project-info"><h3>UI/UX Design</h3><p>Complete product flows and visual systems for apps & websites.</p></div></div>
+      <div class="project-card"><div class="project-img">Motion</div><div class="project-info"><h3>Motion Design</h3><p>Animated brand assets and explainer sequences.</p></div></div>
+      <div class="project-card"><div class="project-img">Graphics</div><div class="project-info"><h3>Graphic Design</h3><p>Brand identity, posters, thumbnails and visual systems.</p></div></div>
     </div>
   </section>
 
-  <!-- Video Modal -->
-  <div id="videoModal" class="video-modal" onclick="closeVideoModal()" aria-hidden="true">
-    <div class="video-modal-content" onclick="event.stopPropagation()">
-      <button class="close-modal" onclick="closeVideoModal()" aria-label="Close video modal">&times;</button>
-      <div class="video-container">
-        <iframe id="videoFrame" src="" title="Project video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <!-- PDF Modal -->
+  <div id="pdfModal" class="modal" role="dialog" aria-label="Document preview">
+    <div class="modal-content" style="max-width:900px;">
+      <button id="pdfClose" class="close-modal" aria-label="Close">&times;</button>
+      <div style="display:flex; gap:.6rem; align-items:center; justify-content:space-between; margin-bottom:.6rem; color:#fff;">
+        <div id="pdfTitle" style="font-weight:600;"></div>
+        <div>
+          <a id="pdfOpenNew" class="small-btn" target="_blank" rel="noopener" style="margin-right:.55rem">Open in new tab</a>
+          <a id="pdfDownload" class="small-btn" download>Download</a>
+        </div>
+      </div>
+      <div style="background:#111; border-radius:8px; padding:0;">
+        <iframe id="pdfFrame" src="" title="Document preview" style="width:100%; height:80vh;" frameborder="0"></iframe>
       </div>
     </div>
   </div>
 
-  <!-- Contact Section -->
+  <!-- Video Modal -->
+  <div id="videoModal" class="modal" onclick="closeVideoModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="close-modal" onclick="closeVideoModal()" aria-label="Close">&times;</button>
+      <div class="video-container">
+        <iframe id="videoFrame" src="" title="Project video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact -->
   <section id="contact" aria-labelledby="contact-heading">
     <h2 id="contact-heading">Get In Touch</h2>
     <div class="contact-info">
@@ -312,102 +541,124 @@
       <p><strong>PHONE:</strong> <a href="tel:+919411906171">+91 9411906171</a></p>
       <p><strong>LOCATION:</strong> Greater Noida, India</p>
     </div>
-
     <form class="contact-form" id="contactForm" action="https://formspree.io/f/xvgvgppo" method="POST">
-      <div class="form-group">
-        <label for="name">Name</label>
-        <input id="name" name="name" type="text" required />
-      </div>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input id="email" name="email" type="email" required />
-      </div>
-      <div class="form-group">
-        <label for="message">Message</label>
-        <textarea id="message" name="message" required></textarea>
-      </div>
+      <div class="form-group"><label for="name">Name</label><input id="name" name="name" type="text" required /></div>
+      <div class="form-group"><label for="email">Email</label><input id="email" name="email" type="email" required /></div>
+      <div class="form-group"><label for="message">Message</label><textarea id="message" name="message" required></textarea></div>
       <button class="submit-btn" type="submit">Send Message</button>
     </form>
   </section>
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 Nitin Kumar. All Rights Reserved.</p>
-  </footer>
+  <footer><p>&copy; 2025 Nitin Kumar. All Rights Reserved.</p></footer>
 
   <script>
-    // Smooth scrolling for same-page links
+    // Mobile Menu
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => {
+      const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+      menuToggle.setAttribute('aria-expanded', !expanded);
+      navLinks.classList.toggle('active');
+    });
+
+    // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
+      anchor.addEventListener('click', e => {
+        const href = anchor.getAttribute('href');
+        if (href === '#' || !href.startsWith('#')) return;
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (!target) return;
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        // close any mobile nav if you add one later
+        document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
       });
     });
 
-    // Navbar scroll effect
+    // Navbar scroll
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) navbar.classList.add('scrolled');
-      else navbar.classList.remove('scrolled');
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
     });
 
-    // Intersection observer for section reveals
+    // Section reveal
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
+      entries.forEach(entry => entry.target.classList.toggle('visible', entry.isIntersecting));
     }, { threshold: 0.12, rootMargin: '0px 0px -80px 0px' });
     document.querySelectorAll('section').forEach(s => observer.observe(s));
 
-    // FORM: visual sending state (Formspree will handle actual submit)
-    const contactForm = document.getElementById('contactForm');
-    contactForm.addEventListener('submit', function (e) {
-      const btn = this.querySelector('.submit-btn');
-      btn.textContent = 'Sending...';
-      btn.disabled = true;
-      // Let Formspree proceed with the submission (no preventDefault)
+    // Form
+    document.getElementById('contactForm').addEventListener('submit', function() {
+      this.querySelector('.submit-btn').textContent = 'Sending...';
+      this.querySelector('.submit-btn').disabled = true;
     });
 
-    // VIDEO MODAL logic
-    const videos = {
-      'video1': 'yS_KAfkAy7E',
-      'video2': 'SjUdL0KZTd0',
-      'video3': 'ZGYZ5iq2X9Q'
-    };
-
+    // Video Modal
+    const videos = { 'video1': 'yS_KAfkAy7E', 'video2': 'SjUdL0KZTd0', 'video3': 'ZGYZ5iq2X9Q' };
     function openVideoModal(id) {
       const modal = document.getElementById('videoModal');
       const iframe = document.getElementById('videoFrame');
-      const videoId = videos[id];
-      if (!videoId) return;
-      iframe.src = `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1`;
+      iframe.src = `https://www.youtube.com/embed/${videos[id]}?rel=0&modestbranding=1`;
       modal.classList.add('active');
-      modal.setAttribute('aria-hidden','false');
       document.body.style.overflow = 'hidden';
     }
-
     function closeVideoModal() {
       const modal = document.getElementById('videoModal');
       const iframe = document.getElementById('videoFrame');
       modal.classList.remove('active');
-      modal.setAttribute('aria-hidden','true');
       iframe.src = '';
       document.body.style.overflow = 'auto';
     }
 
-    // Close modal with Escape
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeVideoModal();
+    // PDF Modal
+    const assetTrigger = document.getElementById('assetTrigger');
+    const assetDropdown = document.getElementById('assetDropdown');
+    const pdfModal = document.getElementById('pdfModal');
+    const pdfFrame = document.getElementById('pdfFrame');
+    const pdfTitle = document.getElementById('pdfTitle');
+    const pdfOpenNew = document.getElementById('pdfOpenNew');
+    const pdfDownload = document.getElementById('pdfDownload');
+    const pdfClose = document.getElementById('pdfClose');
+
+    assetTrigger.addEventListener('click', () => {
+      const open = assetDropdown.classList.toggle('active');
+      assetTrigger.setAttribute('aria-expanded', open);
+      assetDropdown.setAttribute('aria-hidden', !open);
     });
 
-    // Allow keyboard activation on project cards
-    document.querySelectorAll('.project-card[role="button"]').forEach(card => {
-      card.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') card.click();
+    document.addEventListener('click', e => {
+      if (!assetDropdown.contains(e.target) && !assetTrigger.contains(e.target)) {
+        assetDropdown.classList.remove('active');
+        assetTrigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    document.querySelectorAll('[data-preview]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const url = btn.getAttribute('data-preview');
+        pdfFrame.src = url + '#view=FitH';
+        pdfTitle.textContent = url.split('/').pop();
+        pdfOpenNew.href = url;
+        pdfDownload.href = url;
+        pdfModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        assetDropdown.classList.remove('active');
+        setTimeout(() => pdfClose.focus(), 100);
       });
+    });
+
+    function closePdfPreview() {
+      pdfModal.classList.remove('active');
+      pdfFrame.src = '';
+      document.body.style.overflow = 'auto';
+    }
+    pdfClose.addEventListener('click', closePdfPreview);
+    pdfModal.addEventListener('click', e => e.target === pdfModal && closePdfPreview());
+
+    // Escape key
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') { closePdfPreview(); closeVideoModal(); }
+    });
+
+    // Keyboard for project cards
+    document.querySelectorAll('.project-card[role="button"]').forEach(card => {
+      card.addEventListener('keydown', e => (e.key === 'Enter' || e.key === ' ') && card.click());
     });
   </script>
 </body>
