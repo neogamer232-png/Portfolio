@@ -10,11 +10,9 @@
   <meta property="og:image" content="https://yourdomain.com/og-image.jpg" />
   <meta property="og:url" content="https://yourdomain.com" />
   <title>Nitin Kumar — Creative Professional</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
   <style>
     /* Reset & Base */
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -28,7 +26,6 @@
       -webkit-font-smoothing: antialiased;
       min-height: 100vh;
     }
-
     /* NAV */
     nav {
       position: fixed;
@@ -45,7 +42,6 @@
       gap: 1rem;
     }
     nav.scrolled { padding: .8rem 2rem; box-shadow: 0 6px 18px rgba(0,0,0,0.04); }
-
     .nav-left { display: flex; align-items: center; gap: 1.5rem; }
     .brand { font-weight: 600; letter-spacing: 1px; font-size: 1.1rem; }
     .nav-links {
@@ -72,9 +68,7 @@
       transition: width .25s ease;
     }
     .nav-links a:hover::after { width: 100%; }
-
     .nav-actions { display: flex; gap: .8rem; align-items: center; position: relative; }
-
     .btn {
       padding: .6rem .95rem;
       border-radius: 6px;
@@ -89,7 +83,6 @@
     }
     .btn-primary { background: #e63946; color: #fff; }
     .btn-ghost { background: transparent; border: 1px solid rgba(0,0,0,0.08); color: #000; }
-
     /* Mobile Menu Toggle */
     .menu-toggle {
       display: none;
@@ -99,7 +92,6 @@
       cursor: pointer;
       color: #000;
     }
-
     /* Asset Trigger */
     .asset-trigger {
       display: inline-flex;
@@ -132,53 +124,148 @@
       border-left: 2px solid #111; border-top: 2px solid #111;
       border-top-left-radius: 2px;
     }
-
-    /* Dropdown */
+    /* Dropdown – ENHANCED PROFESSIONAL DESIGN */
     .asset-dropdown {
       position: absolute;
       right: 0; top: calc(100% + 12px);
-      min-width: 320px;
+      min-width: 360px;
       background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 18px 50px rgba(10,10,10,0.08);
+      border-radius: 14px;
+      box-shadow: 0 24px 60px rgba(10,10,10,0.12);
       border: 1px solid rgba(0,0,0,0.06);
-      padding: .6rem;
+      padding: 0;
       display: none;
       z-index: 1200;
+      overflow: hidden;
+      animation: dropdownFadeIn 0.32s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+    }
+    @keyframes dropdownFadeIn {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     .asset-dropdown.active { display: block; }
-
-    .asset-row {
-      display: flex; gap: .75rem; align-items: center;
-      padding: .55rem; border-radius: 8px;
-      transition: background .15s ease;
+    /* Dropdown Header */
+    .asset-header {
+      padding: 1.1rem 1.2rem .9rem;
+      background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+      border-bottom: 1px solid rgba(0,0,0,0.04);
     }
-    .asset-row:hover { background: rgba(0,0,0,0.02); }
+    .asset-header h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: #111;
+      margin: 0;
+    }
+    .asset-header p {
+      font-size: .78rem;
+      color: #777;
+      margin-top: .35rem;
+      letter-spacing: .6px;
+    }
+    /* Asset Rows – Modern Card Style */
+    .asset-row {
+      display: flex; gap: 1rem; align-items: center;
+      padding: 1rem 1.2rem;
+      border-bottom: 1px dashed rgba(0,0,0,0.04);
+      transition: all .22s ease;
+      position: relative;
+      cursor: pointer;
+    }
+    .asset-row:last-child { border-bottom: none; }
+    .asset-row:hover {
+      background: linear-gradient(90deg, rgba(230,57,70,0.03) 0%, rgba(230,57,70,0.01) 100%);
+      transform: translateY(-1px);
+    }
+    .asset-row::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 0; height: 100%;
+      width: 4px;
+      background: #e63946;
+      transform: scaleY(0);
+      transition: transform .22s ease;
+    }
+    .asset-row:hover::before { transform: scaleY(1); }
     .asset-thumb {
-      width: 56px; height: 56px; border-radius: 8px;
-      background: #f5f5f5; display: flex;
-      align-items: center; justify-content: center;
-      font-weight: 600; color: #cfcfcf;
+      width: 64px; height: 64px; border-radius: 10px;
+      background: linear-gradient(135deg, #e63946 0%, #ff6b6b 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; color: #fff;
+      font-size: 1.4rem;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 12px rgba(230,57,70,0.25);
+      flex-shrink: 0;
     }
     .asset-meta { flex: 1; }
-    .asset-meta .title { font-weight: 600; font-size: .95rem; }
-    .asset-meta .sub { font-size: .78rem; color: #777; }
-    .asset-controls { display: flex; gap: .5rem; }
-    .small-btn {
-      padding: .45rem .6rem; border-radius: 8px;
-      font-size: .78rem; border: 1px solid rgba(0,0,0,0.06);
-      background: transparent; cursor: pointer;
-      transition: all .15s ease;
+    .asset-meta .title {
+      font-weight: 600; font-size: 1.02rem;
+      color: #111;
+      letter-spacing: .4px;
     }
-    .small-btn:hover { background: rgba(0,0,0,0.05); }
-
+    .asset-meta .sub {
+      font-size: .79rem; color: #666;
+      margin-top: .25rem;
+      letter-spacing: .5px;
+    }
+    .asset-meta .highlight {
+      display: inline-block;
+      background: #e63946;
+      color: #fff;
+      font-size: .68rem;
+      padding: .18rem .5rem;
+      border-radius: 4px;
+      margin-top: .4rem;
+      font-weight: 600;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+    }
+    .asset-controls { display: flex; gap: .6rem; }
+    .small-btn {
+      padding: .52rem .78rem; border-radius: 8px;
+      font-size: .78rem; border: 1px solid rgba(0,0,0,0.1);
+      background: #fff; cursor: pointer;
+      transition: all .2s ease;
+      font-weight: 500;
+      letter-spacing: .6px;
+      display: flex;
+      align-items: center;
+      gap: .35rem;
+      white-space: nowrap;
+    }
+    .small-btn:hover {
+      background: #e63946;
+      color: #fff;
+      border-color: #e63946;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(230,57,70,0.2);
+    }
+    .small-btn svg {
+      width: 14px; height: 14px;
+    }
+    /* Footer */
     .asset-footer {
       display: flex; justify-content: space-between;
-      align-items: center; padding-top: .45rem;
-      border-top: 1px dashed rgba(0,0,0,0.04);
-      margin-top: .45rem; font-size: .84rem; color: #666;
+      align-items: center; padding: .85rem 1.2rem;
+      background: #f9f9f9;
+      border-top: 1px dashed rgba(0,0,0,0.06);
+      font-size: .82rem; color: #555;
+      letter-spacing: .5px;
     }
-
+    .asset-footer .link {
+      color: #e63946;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all .2s ease;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+    .asset-footer .link:hover {
+      text-decoration: underline;
+      transform: translateX(2px);
+    }
     /* HERO */
     .hero {
       height: 100vh; display: flex; flex-direction: column;
@@ -198,15 +285,14 @@
       filter: blur(8px); transform: translate3d(0,0,0);
       animation: floatMove linear infinite; will-change: transform, opacity; opacity: 0.95;
     }
-    .bubble.b1 { width:220px; height:220px; left:6%; top:18%; animation-duration:18s; }
-    .bubble.b2 { width:180px; height:180px; left:72%; top:12%; animation-duration:22s; animation-delay:2s; }
-    .bubble.b3 { width:240px; height:240px; left:15%; top:65%; animation-duration:20s; animation-delay:4s; }
-    .bubble.b4 { width:160px; height:160px; left:80%; top:70%; animation-duration:16s; animation-delay:1s; }
-    .bubble.b5 { width:200px; height:200px; left:45%; top:25%; animation-duration:24s; animation-delay:3s; }
-    .bubble.b6 { width:140px; height:140px; left:30%; top:80%; animation-duration:19s; animation-delay:5s; }
-    .bubble.b7 { width:190px; height:190px; left:60%; top:55%; animation-duration:21s; animation-delay:6s; }
-    .bubble.b8 { width:170px; height:170px; left:88%; top:30%; animation-duration:17s; animation-delay:7s; }
-
+    .bubble.b1 { width:220px; height:220px; left:6%; top:18%; animation-duration:12s; }
+    .bubble.b2 { width:180px; height:180px; left:72%; top:12%; animation-duration:15s; animation-delay:2s; }
+    .bubble.b3 { width:240px; height:240px; left:15%; top:65%; animation-duration:14s; animation-delay:4s; }
+    .bubble.b4 { width:160px; height:160px; left:80%; top:70%; animation-duration:11s; animation-delay:1s; }
+    .bubble.b5 { width:200px; height:200px; left:45%; top:25%; animation-duration:16s; animation-delay:3s; }
+    .bubble.b6 { width:140px; height:140px; left:30%; top:80%; animation-duration:13s; animation-delay:5s; }
+    .bubble.b7 { width:190px; height:190px; left:60%; top:55%; animation-duration:15s; animation-delay:6s; }
+    .bubble.b8 { width:170px; height:170px; left:88%; top:30%; animation-duration:12s; animation-delay:7s; }
     .hero-content { position: relative; z-index: 1; opacity: 0; animation: fadeInUp 1.2s ease forwards; }
     .hero h1 { font-size: clamp(2rem, 6vw, 4.2rem); font-weight: 300; letter-spacing: 3px; color: #000; margin-bottom: .6rem; }
     .hero p { font-size: 1rem; letter-spacing: 1.6px; text-transform: uppercase; color: #666; font-weight: 300; margin: 0; }
@@ -216,17 +302,15 @@
       font-size: .78rem; letter-spacing: 2px; color: #666;
       animation: bounce 2s infinite;
     }
-
     @keyframes fadeInUp { from { opacity:0; transform:translateY(40px); } to { opacity:1; transform:translateY(0); } }
     @keyframes bounce { 0%,100% { transform:translateX(-50%) translateY(0); } 50% { transform:translateX(-50%) translateY(-8px); } }
     @keyframes floatMove {
       0% { transform: translateY(0) translateX(0) scale(1); opacity:0.95; }
-      25% { transform: translateY(-18px) translateX(8px) scale(1.02); opacity:0.9; }
-      50% { transform: translateY(6px) translateX(-12px) scale(0.98); opacity:0.85; }
-      75% { transform: translateY(-10px) translateX(6px) scale(1.01); opacity:0.9; }
+      25% { transform: translateY(-36px) translateX(16px) scale(1.04); opacity:0.85; }
+      50% { transform: translateY(12px) translateX(-24px) scale(0.96); opacity:0.75; }
+      75% { transform: translateY(-20px) translateX(12px) scale(1.03); opacity:0.85; }
       100% { transform: translateY(0) translateX(0) scale(1); opacity:0.95; }
     }
-
     /* SECTIONS */
     section {
       max-width: 1200px; margin: 0 auto; padding: 110px 24px;
@@ -237,7 +321,6 @@
       font-size: 1.8rem; margin-bottom: 2rem; text-align: center;
       color: #000; font-weight: 300; letter-spacing: 3px; text-transform: uppercase;
     }
-
     /* ABOUT */
     .about-content { display: grid; grid-template-columns: 1fr 1.6fr; gap: 3.2rem; align-items: center; }
     .profile-img {
@@ -255,7 +338,6 @@
       border-left: 4px solid #000; border-radius: 6px;
     }
     .info-highlight p { font-size: .92rem; margin-bottom: .35rem; }
-
     /* SKILLS */
     #skills { background: #f5f5f5; }
     .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0; }
@@ -272,7 +354,6 @@
     .skill-card:hover h3, .skill-card:hover p { color: #fff; }
     .skill-card h3 { font-size: 1.05rem; margin-bottom: .8rem; font-weight: 400; letter-spacing: 1px; text-transform: uppercase; }
     .skill-card p { color: #666; line-height: 1.7; font-weight: 300; }
-
     /* PROJECTS */
     .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 1.25rem; }
     .project-card {
@@ -289,7 +370,6 @@
     .project-info { padding: 1.2rem; background: #fff; border-top: 1px solid #eee; }
     .project-info h3 { font-size: 1.05rem; margin-bottom: .5rem; font-weight: 400; letter-spacing: 1px; text-transform: uppercase; }
     .project-info p { color: #666; line-height: 1.6; font-weight: 300; }
-
     /* PLACEHOLDER CARDS */
     .placeholder-cards {
       display: none; /* Hidden — used as data source */
@@ -333,7 +413,6 @@
       color: #777;
       line-height: 1.6;
     }
-
     /* OVERLAY PANEL */
     .overlay-panel {
       position: fixed;
@@ -428,7 +507,6 @@
       color: #777;
       line-height: 1.5;
     }
-
     /* Background dim */
     .page-dimmer {
       position: fixed;
@@ -443,11 +521,10 @@
       opacity: 1;
       pointer-events: auto;
     }
-
     /* MODALS */
     .modal {
       display: none; position: fixed; z-index: 12000;
-      left: 0; top: 0; width: 100%; height: 100%;
+      left: 0; top: 0; width: 100: 100%; height: 100%;
       background-color: rgba(0,0,0,0.9); align-items: center;
       justify-content: center; padding: 2rem;
     }
@@ -467,7 +544,6 @@
     .video-container iframe {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     }
-
     /* CONTACT */
     #contact { background: #f5f5f5; }
     .contact-form { max-width: 700px; margin: 0 auto; }
@@ -497,21 +573,19 @@
       letter-spacing: 1.6px; text-transform: uppercase; cursor: pointer;
     }
     .submit-btn[disabled] { opacity: .6; cursor: default; }
-
     footer {
       background: #000; color: #fff; text-align: center;
       padding: 2rem; font-size: .85rem; letter-spacing: 1px;
       border-top: 4px solid rgba(255,255,255,0.02);
     }
-
     /* RESPONSIVE */
     @media (max-width: 968px) {
       .about-content { grid-template-columns: 1fr; gap: 2rem; }
       section { padding: 80px 20px; }
       .project-img { height: 280px; }
       nav { padding: 1rem; }
+      .asset-dropdown { min-width: 320px; }
     }
-
     @media (max-width: 600px) {
       .hero h1 { font-size: 2rem; letter-spacing: 2px; }
       .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #fff; padding: 1rem; border-top: 1px solid #eee; }
@@ -523,11 +597,12 @@
       .bubble { filter: blur(6px); opacity: 0.85; }
       .bubble.b1, .bubble.b3, .bubble.b7 { width: 160px; height: 160px; }
       .overlay-grid { grid-template-columns: 1fr; }
+      .asset-row { padding: .9rem 1rem; gap: .8rem; }
+      .asset-thumb { width: 56px; height: 56px; font-size: 1.2rem; }
     }
   </style>
 </head>
 <body>
-
   <!-- Navigation -->
   <nav id="navbar" aria-label="Main navigation">
     <div class="nav-left">
@@ -548,38 +623,50 @@
         <span>Docs</span>
       </button>
       <div id="assetDropdown" class="asset-dropdown" role="menu" aria-hidden="true">
+        <!-- Header -->
+        <div class="asset-header">
+          <h4>Professional Documents</h4>
+          <p>Choose format • Preview or download instantly</p>
+        </div>
+        <!-- Resume Row -->
         <div class="asset-row" role="none">
           <div class="asset-thumb">R</div>
           <div class="asset-meta">
-            <div class="title">Resume — One page</div>
-            <div class="sub">Concise summary · ideal for quick reviews</div>
+            <div class="title">Resume</div>
+            <div class="sub">Concise, ATS-friendly, ideal for quick reviews</div>
           </div>
           <div class="asset-controls">
-            <button class="small-btn" data-preview="assets/Nitin-Kumar-Resume.pdf" aria-label="Preview Resume">Preview</button>
-            <a class="small-btn" href="assets/Nitin-Kumar-Resume.pdf" target="_blank" rel="noopener">Open</a>
-            <a class="small-btn" href="assets/Nitin-Kumar-Resume.pdf" download="Nitin-Kumar-Resume.pdf">Download</a>
+            <button class="small-btn" data-preview="assets/Nitin-Kumar-Resume.pdf" aria-label="Preview Resume">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+              Preview
+            </button>
+            <a class="small-btn" href="assets/Nitin-Kumar-Resume.pdf" download="Nitin-Kumar-Resume.pdf">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+              Download
+            </a>
           </div>
         </div>
+        <!-- CV Row -->
         <div class="asset-row" role="none">
           <div class="asset-thumb">CV</div>
           <div class="asset-meta">
-            <div class="title">CV — Full details</div>
-            <div class="sub">Projects, experience & links</div>
+            <div class="title">CV</div>
+            <div class="sub">Detailed experience, projects, skills & references</div>
           </div>
           <div class="asset-controls">
-            <button class="small-btn" data-preview="assets/Nitin-Kumar-CV.pdf" aria-label="Preview CV">Preview</button>
-            <a class="small-btn" href="assets/Nitin-Kumar-CV.pdf" target="_blank" rel="noopener">Open</a>
-            <a class="small-btn" href="assets/Nitin-Kumar-CV.pdf" download="Nitin-Kumar-CV.pdf">Download</a>
+            <button class="small-btn" data-preview="assets/Nitin-Kumar-CV.pdf" aria-label="Preview CV">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+              Preview
+            </button>
+            <a class="small-btn" href="assets/Nitin-Kumar-CV.pdf" download="Nitin-Kumar-CV.pdf">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+              Download
+            </a>
           </div>
-        </div>
-        <div class="asset-footer">
-          <div>Prefer a recruiter-friendly view?</div>
-          <div style="font-weight:600;color:#e63946">Preview inside page</div>
         </div>
       </div>
     </div>
   </nav>
-
   <!-- Hero -->
   <div class="hero" id="home">
     <div class="hero-bg" aria-hidden="true"></div>
@@ -595,7 +682,6 @@
     </div>
     <div class="scroll-indicator" aria-hidden="true">Scroll Down</div>
   </div>
-
   <!-- About -->
   <section id="about" aria-labelledby="about-heading">
     <h2 id="about-heading">About</h2>
@@ -615,7 +701,6 @@
       </div>
     </div>
   </section>
-
   <!-- Skills -->
   <section id="skills" aria-labelledby="skills-heading">
     <h2 id="skills-heading">Expertise</h2>
@@ -628,7 +713,6 @@
       <div class="skill-card"><h3>Web Editing</h3><p>Optimized digital content for web platforms and faster load.</p></div>
     </div>
   </section>
-
   <!-- Experience -->
   <section id="experience" aria-labelledby="experience-heading">
     <h2 id="experience-heading">Experience</h2>
@@ -638,7 +722,6 @@
       <p>YEARS OF CREATIVE EXPERIENCE</p>
     </div>
   </section>
-
   <!-- Projects -->
   <section id="projects" aria-labelledby="projects-heading">
     <h2 id="projects-heading">Selected Work</h2>
@@ -656,7 +739,6 @@
         <div class="project-img" style="background-image:url('https://img.youtube.com/vi/ZGYZ5iq2X9Q/maxresdefault.jpg');"></div>
         <div class="project-info"><h3>Video Editing - Project 3</h3><p>Dynamic edits with motion graphics and sound design.</p></div>
       </div>
-
       <!-- Placeholder Cards (Clickable) -->
       <div class="placeholder-card" data-category="uiux" tabindex="0" role="button" aria-label="Open UI/UX Projects">
         <div class="placeholder-thumb">UI/UX</div>
@@ -680,7 +762,6 @@
         </div>
       </div>
     </div>
-
     <!-- Hidden Data Source for Overlay -->
     <div class="placeholder-cards">
       <!-- UI/UX -->
@@ -696,7 +777,6 @@
         <div class="placeholder-thumb">Dash</div>
         <div class="placeholder-info"><h3>Analytics Dashboard</h3><p>Data visualization & dark mode.</p></div>
       </div>
-
       <!-- Motion -->
       <div class="placeholder-card" data-category="motion">
         <div class="placeholder-thumb">Anim</div>
@@ -710,7 +790,6 @@
         <div class="placeholder-thumb">Expl</div>
         <div class="placeholder-info"><h3>Product Explainer</h3><p>2D motion graphics.</p></div>
       </div>
-
       <!-- Graphics -->
       <div class="placeholder-card" data-category="graphics">
         <div class="placeholder-thumb">Logo</div>
@@ -726,7 +805,6 @@
       </div>
     </div>
   </section>
-
   <!-- Overlay Panel -->
   <div class="page-dimmer" id="dimmer"></div>
   <div class="overlay-panel" id="overlayPanel" role="dialog" aria-modal="true" aria-labelledby="overlayTitle">
@@ -740,7 +818,6 @@
       </div>
     </div>
   </div>
-
   <!-- PDF Modal -->
   <div id="pdfModal" class="modal" role="dialog" aria-label="Document preview">
     <div class="modal-content" style="max-width:900px;">
@@ -757,7 +834,6 @@
       </div>
     </div>
   </div>
-
   <!-- Video Modal -->
   <div id="videoModal" class="modal" onclick="closeVideoModal()">
     <div class="modal-content" onclick="event.stopPropagation()">
@@ -767,7 +843,6 @@
       </div>
     </div>
   </div>
-
   <!-- Contact -->
   <section id="contact" aria-labelledby="contact-heading">
     <h2 id="contact-heading">Get In Touch</h2>
@@ -783,9 +858,7 @@
       <button class="submit-btn" type="submit">Send Message</button>
     </form>
   </section>
-
   <footer><p>&copy; 2025 Nitin Kumar. All Rights Reserved.</p></footer>
-
   <script>
     // Mobile Menu
     const menuToggle = document.getElementById('menuToggle');
@@ -795,7 +868,6 @@
       menuToggle.setAttribute('aria-expanded', !expanded);
       navLinks.classList.toggle('active');
     });
-
     // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', e => {
@@ -805,25 +877,21 @@
         document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
       });
     });
-
     // Navbar scroll
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
       navbar.classList.toggle('scrolled', window.scrollY > 50);
     });
-
     // Section reveal
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => entry.target.classList.toggle('visible', entry.isIntersecting));
     }, { threshold: 0.12, rootMargin: '0px 0px -80px 0px' });
     document.querySelectorAll('section').forEach(s => observer.observe(s));
-
     // Form
     document.getElementById('contactForm').addEventListener('submit', function() {
       this.querySelector('.submit-btn').textContent = 'Sending...';
       this.querySelector('.submit-btn').disabled = true;
     });
-
     // Video Modal
     const videos = { 'video1': 'yS_KAfkAy7E', 'video2': 'SjUdL0KZTd0', 'video3': 'ZGYZ5iq2X9Q' };
     function openVideoModal(id) {
@@ -840,7 +908,6 @@
       iframe.src = '';
       document.body.style.overflow = 'auto';
     }
-
     // PDF Modal
     const assetTrigger = document.getElementById('assetTrigger');
     const assetDropdown = document.getElementById('assetDropdown');
@@ -850,20 +917,17 @@
     const pdfOpenNew = document.getElementById('pdfOpenNew');
     const pdfDownload = document.getElementById('pdfDownload');
     const pdfClose = document.getElementById('pdfClose');
-
     assetTrigger.addEventListener('click', () => {
       const open = assetDropdown.classList.toggle('active');
       assetTrigger.setAttribute('aria-expanded', open);
       assetDropdown.setAttribute('aria-hidden', !open);
     });
-
     document.addEventListener('click', e => {
       if (!assetDropdown.contains(e.target) && !assetTrigger.contains(e.target)) {
         assetDropdown.classList.remove('active');
         assetTrigger.setAttribute('aria-expanded', 'false');
       }
     });
-
     document.querySelectorAll('[data-preview]').forEach(btn => {
       btn.addEventListener('click', () => {
         const url = btn.getAttribute('data-preview');
@@ -877,7 +941,6 @@
         setTimeout(() => pdfClose.focus(), 100);
       });
     });
-
     function closePdfPreview() {
       pdfModal.classList.remove('active');
       pdfFrame.src = '';
@@ -885,12 +948,10 @@
     }
     pdfClose.addEventListener('click', closePdfPreview);
     pdfModal.addEventListener('click', e => e.target === pdfModal && closePdfPreview());
-
     // Escape key
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') { closePdfPreview(); closeVideoModal(); closeOverlay(); }
     });
-
     // Keyboard for project cards
     document.querySelectorAll('.project-card[role="button"], .placeholder-card[role="button"]').forEach(card => {
       card.addEventListener('keydown', e => {
@@ -900,7 +961,6 @@
         }
       });
     });
-
     // === OVERLAY PANEL LOGIC ===
     const overlayPanel = document.getElementById('overlayPanel');
     const overlayGrid = document.getElementById('overlayGrid');
@@ -908,13 +968,11 @@
     const overlayClose = document.getElementById('overlayClose');
     const dimmer = document.getElementById('dimmer');
     const allExamples = document.querySelectorAll('.placeholder-cards .placeholder-card');
-
     const titles = {
       uiux: 'UI/UX Design',
       motion: 'Motion Design',
       graphics: 'Graphic Design'
     };
-
     function openOverlay(category) {
       overlayTitle.textContent = titles[category] || 'Projects';
       overlayGrid.innerHTML = '';
@@ -927,17 +985,14 @@
       dimmer.classList.add('active');
       document.body.style.overflow = 'hidden';
     }
-
     function closeOverlay() {
       overlayPanel.classList.remove('active');
       dimmer.classList.remove('active');
       document.body.style.overflow = 'auto';
     }
-
     document.querySelectorAll('.projects-grid .placeholder-card').forEach(card => {
       card.addEventListener('click', () => openOverlay(card.dataset.category));
     });
-
     overlayClose.addEventListener('click', closeOverlay);
     dimmer.addEventListener('click', closeOverlay);
   </script>
